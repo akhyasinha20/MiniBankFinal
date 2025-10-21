@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MiniBank.Models.UserRegister>
+@{
+    ViewBag.Title = "ManageCustomers";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2 class="text-primary mb-4">Manage Customers</h2>
+
+<table class="table table-hover align-middle">
+    <thead class="table-info">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>PAN</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.CustomerId</td>
+                <td>@c.CustName</td>
+                <td>@c.PAN</td>
+                <td>@c.Email</td>
+                <td>
+                    <a href="@Url.Action("DeactivateCustomer", new { id = c.CustomerId })" class="btn btn-sm btn-danger">Deactivate</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

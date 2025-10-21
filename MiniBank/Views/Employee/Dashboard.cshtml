@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2 class="fw-bold text-success mb-4">Employee Dashboard</h2>
+
+<div class="row text-center g-4">
+    <div class="col-md-4">
+        <a href="@Url.Action("OpenAccount")" class="btn btn-outline-primary w-100 py-3">Open Savings Account</a>
+    </div>
+    <div class="col-md-4">
+        <a href="@Url.Action("LoanAccount")" class="btn btn-outline-info w-100 py-3">Open Loan Account</a>
+    </div>
+    <div class="col-md-4">
+        <a href="@Url.Action("DepositWithdraw")" class="btn btn-outline-success w-100 py-3">Deposit / Withdraw</a>
+    </div>
+</div>
+
+<div class="row text-center g-4 mt-4">
+    <div class="col-md-6">
+        <a href="@Url.Action("Report")" class="btn btn-outline-secondary w-100 py-3">View Report</a>
+    </div>
+    <div class="col-md-6">
+        <a href="@Url.Action("Dashboard", "Auth")" class="btn btn-outline-dark w-100 py-3">Logout</a>
+    </div>
+</div>
+

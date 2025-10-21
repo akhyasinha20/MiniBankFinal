@@ -1,0 +1,31 @@
+﻿body {
+    background-color: #f5f7fa;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    padding: 20px;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    border: none;
+}
+
+    .btn-primary:hover {
+        background-color: #004090;
+    }
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

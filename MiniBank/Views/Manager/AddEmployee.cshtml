@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MiniBank.Models.UserRegister>
+@{
+    ViewBag.Title = "AddEmployee";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+<h2 class="text-primary mb-4">Manage Employees</h2>
+
+<table class="table table-hover align-middle">
+    <thead class="table-primary">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.UserId</td>
+                <td>@emp.Username</td>
+                <td>@emp.Email</td>
+                <td>
+                    @if ((bool)emp.IsActive)
+                    {
+                        <span class="badge bg-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    }
+                </td>
+                <td>
+                    @if (!(bool)emp.IsActive)
+                    {
+                        <a href="@Url.Action("Approve", new { id = emp.UserId })" class="btn btn-sm btn-success">Approve</a>
+                    }
+                    <a href="@Url.Action("Remove", new { id = emp.UserId })" class="btn btn-sm btn-danger">Remove</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

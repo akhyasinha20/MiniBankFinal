@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="card shadow-sm p-4 mt-4">
+    <h3 class="text-secondary mb-3">Generate Report</h3>
+
+    <form method="post">
+        <div class="mb-3">
+            <label>Type</label>
+            <select name="type" class="form-select" required>
+                <option value="Savings">Savings</option>
+                <option value="Loan">Loan</option>
+            </select>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label>From Date</label>
+                <input type="date" name="fromDate" class="form-control" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>To Date</label>
+                <input type="date" name="toDate" class="form-control" required />
+            </div>
+        </div>
+
+        <button class="btn btn-secondary w-100">Generate</button>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger mt-3">@ViewBag.Error</div>
+        }
+    </form>
+</div>
+
+@if (ViewBag.Transactions != null)
+{
+    <div class="card shadow-sm p-4 mt-4">
+        <h4 class="text-secondary mb-3">Transaction Report</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Transaction ID</th>
+                    <th>Account ID</th>
+                    <th>Type</th>
+                    <th>Amount (₹)</th>
+                    <th>Balance/Outstanding After</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in ViewBag.Transactions)
+                {
+                    <tr>
+                        <td>@t.TransactionId</td>
+                        <td>@t.AccountId</td>
+                        <td>@(t.TransactionType ?? "N/A")</td>
+                        <td>@t.Amount</td>
+                        <td>@(t.BalanceAfter ?? t.OutstandingAfter)</td>
+                        <td>@t.TransactionDate?.ToShortDateString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

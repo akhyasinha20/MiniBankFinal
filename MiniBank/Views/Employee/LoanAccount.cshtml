@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "LoanAccount";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+
+<div class="card shadow-sm p-4 mt-4">
+    <h3 class="text-info mb-3">Open Loan Account</h3>
+
+    <form method="post">
+        <div class="mb-3">
+            <label>Customer ID</label>
+            <input type="number" name="customerId" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label>Loan Amount (₹)</label>
+            <input type="number" name="loanAmount" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label>Tenure (months)</label>
+            <input type="number" name="tenure" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-info w-100">Create Loan Account</button>
+
+        <div class="text-danger mt-3">@ViewBag.Error</div>
+        <div class="text-success mt-3">@ViewBag.Message</div>
+    </form>
+</div>
+

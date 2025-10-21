@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "DepositWithdraw";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="card shadow-sm p-4 mt-4">
+    <h3 class="mb-3 text-success">Deposit / Withdraw Money</h3>
+
+    <form method="post">
+        <div class="mb-3">
+            <label>Account ID</label>
+            <input type="number" name="accountId" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label>Transaction Type</label>
+            <select name="type" class="form-select">
+                <option>Deposit</option>
+                <option>Withdrawal</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Amount (₹)</label>
+            <input type="number" name="amount" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Submit</button>
+
+        <div class="text-danger mt-3">@ViewBag.Error</div>
+        <div class="text-success mt-3">@ViewBag.Message</div>
+    </form>
+</div>
+

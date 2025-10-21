@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="container p-4 mt-3">
+    <h2 class="text-center mb-4">Register</h2>
+
+    <form method="post" class="mx-auto" style="max-width: 400px;">
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Role</label>
+            <select name="role" class="form-select">
+                <option>Employee</option>
+                <option>Manager</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Register</button>
+
+        <div class="mt-3 text-success">@ViewBag.Message</div>
+        <div class="mt-3 text-danger">@ViewBag.Error</div>
+    </form>
+</div>

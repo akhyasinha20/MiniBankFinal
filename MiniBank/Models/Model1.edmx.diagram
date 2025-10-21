@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="03fbe456e76c41b3b7186b536f3d91ef" Name="Diagram1">
+        <EntityTypeShape EntityType="MiniBankDBModel.Account" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiniBankDBModel.Customer" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiniBankDBModel.Department" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiniBankDBModel.Employee" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiniBankDBModel.LoanAccount" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiniBankDBModel.LoanTransaction" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiniBankDBModel.SavingsAccount" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiniBankDBModel.SavingsTransaction" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiniBankDBModel.UserRegister" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="MiniBankDBModel.FK_Account_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="MiniBankDBModel.FK_LoanAccount_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="MiniBankDBModel.FK_SavingsAccount_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="MiniBankDBModel.FK_Employee_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="MiniBankDBModel.FK_LoanTransaction_LoanAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="MiniBankDBModel.FK_SavingsTransaction_SavingsAccount" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

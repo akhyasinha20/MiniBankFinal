@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "OpenAccount";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="card shadow-sm p-4 mt-4">
+    <h3 class="mb-3 text-primary">Open New Savings Account</h3>
+
+    <form method="post">
+        @if (ViewBag.Step == null || ViewBag.Step == 1)
+        {
+            <!-- Step 1: Ask for PAN -->
+            <div class="mb-3">
+                <label class="form-label">PAN Number</label>
+                <input type="text" name="pan" class="form-control" required />
+            </div>
+        }
+        else if (ViewBag.Step == 2)
+        {
+            <!-- Step 2: Ask for additional details -->
+            <input type="hidden" name="pan" value="@ViewBag.PAN" />
+            <div class="mb-3">
+                <label class="form-label">Customer Name</label>
+                <input type="text" name="name" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Date of Birth</label>
+                <input type="date" name="dob" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Minimum Balance</label>
+                <input type="number" name="minBalance" class="form-control" min="1000" required />
+                <small class="text-muted">Minimum balance must be ₹1000 or more.</small>
+            </div>
+        }
+
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger mt-3">@ViewBag.Error</div>
+        }
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-success mt-3">@ViewBag.Message</div>
+        }
+    </form>
+</div>

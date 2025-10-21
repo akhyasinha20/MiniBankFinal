@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MiniBankDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="AccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountType" Type="nvarchar" MaxLength="20" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="CreatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="DOB" Type="date" />
+    <Property Name="PAN" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="150" />
+    <Property Name="CreatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DeptId" />
+    </Key>
+    <Property Name="DeptId" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="DeptName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmpId" />
+    </Key>
+    <Property Name="EmpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="DeptId" Type="nvarchar" MaxLength="6" />
+    <Property Name="PAN" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="LoanAccount">
+    <Key>
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="LoanAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="TenureMonths" Type="int" Nullable="false" />
+    <Property Name="AnnualROI" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="EMI" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OutstandingAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsClosed" Type="bit" />
+  </EntityType>
+  <EntityType Name="LoanTransaction">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LoanAccountId" Type="int" Nullable="false" />
+    <Property Name="TransDate" Type="datetime" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="OutstandingAfter" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SavingsAccount">
+    <Key>
+      <PropertyRef Name="AccountId" />
+    </Key>
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="Balance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="MinBalance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SavingsTransaction">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountId" Type="int" Nullable="false" />
+    <Property Name="TransactionDate" Type="datetime" />
+    <Property Name="TransactionType" Type="nvarchar" MaxLength="10" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="BalanceAfter" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRegister">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="150" />
+    <Property Name="Role" Type="nvarchar" MaxLength="20" />
+    <Property Name="ReferenceId" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedAt" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_Account_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Employee_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DeptId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="DeptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoanAccount_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="LoanAccount" Type="Self.LoanAccount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="LoanAccount">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoanTransaction_LoanAccount">
+    <End Role="LoanAccount" Type="Self.LoanAccount" Multiplicity="1" />
+    <End Role="LoanTransaction" Type="Self.LoanTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoanAccount">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="LoanTransaction">
+        <PropertyRef Name="LoanAccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SavingsAccount_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="SavingsAccount" Type="Self.SavingsAccount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="SavingsAccount">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SavingsTransaction_SavingsAccount">
+    <End Role="SavingsAccount" Type="Self.SavingsAccount" Multiplicity="1" />
+    <End Role="SavingsTransaction" Type="Self.SavingsTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SavingsAccount">
+        <PropertyRef Name="AccountId" />
+      </Principal>
+      <Dependent Role="SavingsTransaction">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MiniBankDBModelStoreContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoanAccount" EntityType="Self.LoanAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoanTransaction" EntityType="Self.LoanTransaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SavingsAccount" EntityType="Self.SavingsAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SavingsTransaction" EntityType="Self.SavingsTransaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Account_Customer" Association="Self.FK_Account_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoanAccount_Account" Association="Self.FK_LoanAccount_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="LoanAccount" EntitySet="LoanAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoanTransaction_LoanAccount" Association="Self.FK_LoanTransaction_LoanAccount">
+      <End Role="LoanAccount" EntitySet="LoanAccount" />
+      <End Role="LoanTransaction" EntitySet="LoanTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SavingsAccount_Account" Association="Self.FK_SavingsAccount_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="SavingsAccount" EntitySet="SavingsAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SavingsTransaction_SavingsAccount" Association="Self.FK_SavingsTransaction_SavingsAccount">
+      <End Role="SavingsAccount" EntitySet="SavingsAccount" />
+      <End Role="SavingsTransaction" EntitySet="SavingsTransaction" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
