@@ -1,0 +1,89 @@
+CREATE DATABASE MiniBankDB;
+
+USE MiniBankDB;
+
+
+CREATE TABLE Department (
+    DeptId NVARCHAR(6) PRIMARY KEY,
+    DeptName NVARCHAR(100) NOT NULL
+);
+insert into department (DeptId,DeptName)Values ('DEPT01','Savings Department');
+insert into department (DeptId,DeptName)Values ('DEPT02','Loan Department');
+select * from Department;
+CREATE TABLE Employee (
+    EmpId INT IDENTITY(10000,1) PRIMARY KEY,
+    EmployeeName NVARCHAR(150) NOT NULL,
+    DeptId NVARCHAR(6) NULL,
+    PAN NVARCHAR(10) UNIQUE NOT NULL,
+    IsActive BIT DEFAULT 0,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_Employee_Department FOREIGN KEY (DeptId) REFERENCES Department(DeptId)
+);
+
+CREATE TABLE Customer (
+    CustomerId INT IDENTITY(1000,1) PRIMARY KEY,
+    CustName NVARCHAR(150) NOT NULL,
+    DOB DATE NULL,
+    PAN NVARCHAR(10) UNIQUE NOT NULL,
+    Email NVARCHAR(150),
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Account (
+    AccountId INT IDENTITY(10000,1) PRIMARY KEY,
+    AccountType NVARCHAR(20) CHECK (AccountType IN ('Savings','Loan')),
+    CustomerId INT NOT NULL,
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    CONSTRAINT FK_Account_Customer FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId)
+);
+Select * from Customer;
+select * from SavingsAccount ;
+CREATE TABLE SavingsAccount (
+    AccountId INT PRIMARY KEY,
+    Balance DECIMAL(18,2) NOT NULL DEFAULT 0,
+    MinBalance DECIMAL(18,2) NOT NULL DEFAULT 1000,
+    CONSTRAINT FK_SavingsAccount_Account FOREIGN KEY (AccountId) REFERENCES Account(AccountId)
+);
+select * from SavingsTransaction
+
+CREATE TABLE SavingsTransaction (
+    TransactionId INT IDENTITY(1,1) PRIMARY KEY,
+    AccountId INT NOT NULL,
+    TransactionDate DATETIME DEFAULT GETDATE(),
+    TransactionType NVARCHAR(10) CHECK (TransactionType IN ('Deposit','Withdrawal','Transfer')),
+    Amount DECIMAL(18,2) NOT NULL,
+    BalanceAfter DECIMAL(18,2) NOT NULL,
+    CONSTRAINT FK_SavingsTransaction_SavingsAccount FOREIGN KEY (AccountId) REFERENCES SavingsAccount(AccountId)
+);
+
+CREATE TABLE LoanAccount (
+    AccountId INT PRIMARY KEY,
+    LoanAmount DECIMAL(18,2) NOT NULL,
+    StartDate DATE NOT NULL,
+    TenureMonths INT NOT NULL,
+    AnnualROI DECIMAL(5,2) NOT NULL,
+    EMI DECIMAL(18,2),
+    OutstandingAmount DECIMAL(18,2),
+    IsClosed BIT DEFAULT 0,
+    CONSTRAINT FK_LoanAccount_Account FOREIGN KEY (AccountId) REFERENCES Account(AccountId)
+);
+
+CREATE TABLE LoanTransaction (
+    TransactionId INT IDENTITY(1,1) PRIMARY KEY,
+    LoanAccountId INT NOT NULL,
+    TransDate DATETIME DEFAULT GETDATE(),
+    Amount DECIMAL(18,2) NOT NULL,
+    OutstandingAfter DECIMAL(18,2) NOT NULL,
+    CONSTRAINT FK_LoanTransaction_LoanAccount FOREIGN KEY (LoanAccountId) REFERENCES LoanAccount(AccountId)
+);
+
+CREATE TABLE UserRegister (
+    UserId INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(100) UNIQUE NOT NULL,
+    PasswordHash NVARCHAR(256) NOT NULL,
+    Email NVARCHAR(150),
+    Role NVARCHAR(20) CHECK (Role IN ('Customer','Employee','Manager')),
+    ReferenceId INT NULL,
+    IsActive BIT DEFAULT 0,
+    CreatedAt DATETIME DEFAULT GETDATE()
+);
