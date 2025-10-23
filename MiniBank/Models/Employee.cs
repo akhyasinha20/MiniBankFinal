@@ -17,7 +17,7 @@ namespace MiniBank.Models
         public int EmpId { get; set; }
         public string EmployeeName { get; set; }
         public string DeptId { get; set; }
-        public string PAN { get; set; }
+        public string Email { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
     

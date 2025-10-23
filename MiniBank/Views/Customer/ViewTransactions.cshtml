@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "ViewTransactions";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h3 class="text-primary mb-4">Transaction History</h3>
+
+<div class="card mb-4 p-3">
+    <form method="get" class="row g-2 align-items-end">
+        <div class="col-auto">
+            <label class="form-label">Type</label>
+            <select name="type" class="form-select">
+                <option value="Savings" @(ViewBag.SelectedType == "Savings" ? "selected" : "")>Savings</option>
+                <option value="Loan" @(ViewBag.SelectedType == "Loan" ? "selected" : "")>Loan</option>
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Show</button>
+        </div>
+    </form>
+</div>
+
+@if (ViewBag.Transactions == null || !((IEnumerable<object>)ViewBag.Transactions).Any())
+{
+    <div class="alert alert-info">No transactions found for the selected type.</div>
+}
+else
+{
+    if (ViewBag.SelectedType == "Loan")
+    {
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Loan Account ID</th>
+                    <th>Amount (₹)</th>
+                    <th>Outstanding After (₹)</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tx in ViewBag.Transactions)
+                {
+                    <tr>
+                        <td>@tx.TransactionId</td>
+                        <td>@tx.LoanAccountId</td>
+                        <td>@String.Format("{0:N2}", tx.Amount)</td>
+                        <td>@String.Format("{0:N2}", tx.OutstandingAfter)</td>
+                        <td>@(tx.TransDate != null ? ((DateTime)tx.TransDate).ToString("dd-MM-yyyy hh:mm tt") : "")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Account ID</th>
+                    <th>Type</th>
+                    <th>Amount (₹)</th>
+                    <th>Balance After (₹)</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tx in ViewBag.Transactions)
+                {
+                    <tr>
+                        <td>@tx.TransactionId</td>
+                        <td>@tx.AccountId</td>
+                        <td>@tx.TransactionType</td>
+                        <td>@String.Format("{0:N2}", tx.Amount)</td>
+                        <td>@String.Format("{0:N2}", tx.BalanceAfter)</td>
+                        <td>@(tx.TransactionDate != null ? ((DateTime)tx.TransactionDate).ToString("dd-MM-yyyy hh:mm tt") : "")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}

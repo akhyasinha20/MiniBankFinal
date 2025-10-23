@@ -1,17 +1,27 @@
-﻿using System;
+﻿using MiniBank.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
-using MiniBank.Models;
 namespace MiniBank.Controllers
 {
     public class AuthController : Controller
     {
         // GET: Auth
-        private MiniBankDBEntities1 db = new MiniBankDBEntities1();
+        private MiniBankDBEntities4 db = new MiniBankDBEntities4();
+
         [HttpGet]
-        public ActionResult Login() => View();
+        public ActionResult Login()
+        {
+            // Show message carried from Register (PRG)
+            if (TempData["Message"] != null)
+            {
+                ViewBag.Message = TempData["Message"];
+            }
+            return View();
+        }
 
         [HttpPost]
         public ActionResult Login(string username, string password)
@@ -31,6 +41,7 @@ namespace MiniBank.Controllers
                 return View();
             }
 
+            // Set session so layout can show Logout
             Session["UserId"] = user.UserId;
             Session["Role"] = user.Role;
             Session["Username"] = user.Username;
@@ -52,9 +63,30 @@ namespace MiniBank.Controllers
         [HttpPost]
         public ActionResult Register(string username, string password, string email, string role)
         {
+            var usernameRegex = new Regex(@"^[A-Za-z]+$"); // only alphabets
+            var passwordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$");
+            if (string.IsNullOrWhiteSpace(username) || !usernameRegex.IsMatch(username))
+            {
+                ViewBag.Error = "Username must contain only alphabets (A-Z, a-z).";
+                ViewBag.Message = null;
+                ViewBag.Username = username;
+                ViewBag.Email = email;
+                return View();
+            }
+
+            if (string.IsNullOrWhiteSpace(password) || !passwordRegex.IsMatch(password))
+            {
+                ViewBag.Error = "Password must contain at least one uppercase letter, one lowercase letter and one number.";
+                ViewBag.Message = null;
+                ViewBag.Username = username;
+                ViewBag.Email = email;
+                return View();
+            }
+
             if (db.UserRegisters.Any(u => u.Username == username))
             {
                 ViewBag.Error = "Username already exists.";
+                ViewBag.Message = null;
                 return View();
             }
 
@@ -70,8 +102,9 @@ namespace MiniBank.Controllers
             db.UserRegisters.Add(user);
             db.SaveChanges();
 
-            ViewBag.Message = "Registration successful! Manager approval required for employees.";
-            return View();
+            // PRG: redirect to Login and carry a success message
+            TempData["Message"] = "Registration successful! Manager approval required for employees.";
+            return RedirectToAction("Login");
         }
 
         public ActionResult Logout()
@@ -80,4 +113,4 @@ namespace MiniBank.Controllers
             return RedirectToAction("Login");
         }
     }
-    }
+}

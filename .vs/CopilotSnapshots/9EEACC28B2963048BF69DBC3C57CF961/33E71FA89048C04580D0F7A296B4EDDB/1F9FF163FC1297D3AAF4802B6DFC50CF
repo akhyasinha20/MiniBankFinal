@@ -1,0 +1,15 @@
+﻿using System;
+
+namespace MiniBank.ViewModels
+{
+    public class CloseAccountVm
+    {
+        public int AccountId { get; set; }
+        public string AccountType { get; set; }
+        public string CustomerName { get; set; }
+        public decimal? Balance { get; set; }
+        public decimal? OutstandingAmount { get; set; }
+        public bool CanClose { get; set; }
+        public string ReasonIfCannotClose { get; set; }
+    }
+}

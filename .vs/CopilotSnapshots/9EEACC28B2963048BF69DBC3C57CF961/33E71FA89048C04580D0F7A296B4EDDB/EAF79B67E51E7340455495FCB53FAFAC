@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MiniBank.ViewModels.CloseAccountVm>
+
+@{
+    ViewBag.Title = "Close Account";
+}
+
+<h2>Close Account</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Account ID</th>
+            <th>Type</th>
+            <th>Customer</th>
+            <th>Balance / Outstanding</th>
+            <th>Can Close</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model == null || !Model.Any())
+        {
+            <tr><td colspan="6" class="text-center">No accounts found.</td></tr>
+        }
+        else
+        {
+            foreach (var a in Model)
+            {
+                <tr>
+                    <td>@a.AccountId</td>
+                    <td>@a.AccountType</td>
+                    <td>@a.CustomerName</td>
+                    <td>@(a.Balance.HasValue ? a.Balance.Value.ToString("F2") : (a.OutstandingAmount.HasValue ? a.OutstandingAmount.Value.ToString("F2") : "-"))</td>
+                    <td>@(a.CanClose ? "Yes" : "No")</td>
+                    <td>
+                        @if (a.CanClose)
+                        {
+                            using (Html.BeginForm("CloseAccount", "Employee", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.Hidden("accountId", a.AccountId)
+                                @Html.Hidden("accountType", a.AccountType)
+                                <button type="submit" class="btn btn-danger btn-sm">Close</button>
+                            }
+                        }
+                        else
+                        {
+                            <span class="text-muted">@a.ReasonIfCannotClose</span>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

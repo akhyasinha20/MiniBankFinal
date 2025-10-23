@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Open Savings Account";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+
+    int step = 1;
+    if (ViewBag.Step != null)
+    {
+        int.TryParse(ViewBag.Step.ToString(), out step);
+    }
+
+    var pan = ViewBag.PAN as string ?? "";
+    var name = ViewBag.Name as string ?? "";
+    var dob = ViewBag.DOB as string ?? "";
+    var minBalance = ViewBag.MinBalance != null ? ViewBag.MinBalance.ToString() : "";
+    var email = ViewBag.Email as string ?? "";
+}
+
+<div class="container mt-4" style="max-width:720px;">
+    <h3 class="mb-4">Open Savings Account</h3>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success">@ViewBag.Message</div>
+    }
+    else
+    {
+        if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Error</div>
+        }
+
+        if (step == 1)
+        {
+            <form method="post" action='@Url.Action("OpenAccount", "Manager")' class="row g-3">
+                @Html.AntiForgeryToken()
+                <div class="col-12">
+                    <label class="form-label">PAN</label>
+                    <input type="text" name="pan" class="form-control" value="@pan" required />
+                    <div class="form-text">Enter customer's PAN to check existence and continue.</div>
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Next</button>
+                    <a href='@Url.Action("Dashboard","Manager")' class="btn btn-secondary ms-2">Cancel</a>
+                </div>
+            </form>
+        }
+        else
+        {
+            <form method="post" action='@Url.Action("OpenAccount", "Manager")' class="row g-3">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="pan" value="@pan" />
+
+                <div class="col-md-6">
+                    <label class="form-label">Customer Name</label>
+                    <input type="text" name="name" class="form-control" value="@name" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" value="@email" />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Date of Birth</label>
+                    <input type="date" name="dob" class="form-control" value="@dob" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Initial Deposit (Min ₹1000)</label>
+                    <input type="number" name="minBalance" step="0.01" min="0" class="form-control" value="@minBalance" required />
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Create Account</button>
+                    <a href='@Url.Action("OpenAccount","Manager")' class="btn btn-link ms-2">Back</a>
+                </div>
+            </form>
+        }
+    }
+</div>

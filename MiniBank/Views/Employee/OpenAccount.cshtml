@@ -12,7 +12,7 @@
             <!-- Step 1: Ask for PAN -->
             <div class="mb-3">
                 <label class="form-label">PAN Number</label>
-                <input type="text" name="pan" class="form-control" required />
+                <input type="text" name="pan" class="form-control" required value="@(ViewBag.PAN ?? string.Empty)" />
             </div>
         }
         else if (ViewBag.Step == 2)
@@ -21,19 +21,20 @@
             <input type="hidden" name="pan" value="@ViewBag.PAN" />
             <div class="mb-3">
                 <label class="form-label">Customer Name</label>
-                <input type="text" name="name" class="form-control" required />
+                <input type="text" name="name" class="form-control" required pattern="[A-Za-z]+" title="Only alphabets allowed" value="@(ViewBag.Name ?? string.Empty)" />
+                <div class="form-text text-muted">Only letters (A-Z, a-z) are allowed.</div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Date of Birth</label>
-                <input type="date" name="dob" class="form-control" required />
+                <input type="date" name="dob" class="form-control" required max="@DateTime.Now.ToString("yyyy-MM-dd")" value="@(ViewBag.DOB ?? string.Empty)" />
             </div>
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" required />
+                <input type="email" name="email" class="form-control" required value="@(ViewBag.Email ?? string.Empty)" />
             </div>
             <div class="mb-3">
                 <label class="form-label">Minimum Balance</label>
-                <input type="number" name="minBalance" class="form-control" min="1000" required />
+                <input type="number" name="minBalance" class="form-control" min="1000" required value="@(ViewBag.MinBalance ?? string.Empty)" />
                 <small class="text-muted">Minimum balance must be ₹1000 or more.</small>
             </div>
         }

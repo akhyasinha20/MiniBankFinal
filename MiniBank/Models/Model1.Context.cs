@@ -13,10 +13,10 @@ namespace MiniBank.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MiniBankDBEntities1 : DbContext
+    public partial class MiniBankDBEntities4 : DbContext
     {
-        public MiniBankDBEntities1()
-            : base("name=MiniBankDBEntities1")
+        public MiniBankDBEntities4()
+            : base("name=MiniBankDBEntities4")
         {
         }
     

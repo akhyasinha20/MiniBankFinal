@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="MiniBankDBModelStoreContainer" CdmEntityContainer="MiniBankDBEntities1">
+  <EntityContainerMapping StorageEntityContainer="MiniBankDBModelStoreContainer" CdmEntityContainer="MiniBankDBEntities4">
     <EntitySetMapping Name="Accounts">
       <EntityTypeMapping TypeName="MiniBankDBModel.Account">
         <MappingFragment StoreEntitySet="Account">
@@ -37,7 +37,7 @@
           <ScalarProperty Name="EmpId" ColumnName="EmpId" />
           <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
           <ScalarProperty Name="DeptId" ColumnName="DeptId" />
-          <ScalarProperty Name="PAN" ColumnName="PAN" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
         </MappingFragment>

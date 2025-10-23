@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+
+    var customer = ViewBag.Customer as MiniBank.Models.Customer;
+    var custName = customer != null ? customer.CustName : "-";
+    var custEmail = customer != null ? customer.Email : "-";
+    var custDob = (customer != null && customer.DOB.HasValue) ? customer.DOB.Value.ToString("yyyy-MM-dd") : "-";
+    var custPAN = customer != null ? customer.PAN : "-";
+    var custCreated = (customer != null && customer.CreatedAt.HasValue) ? customer.CreatedAt.Value.ToString("yyyy-MM-dd") : "-";
+
+    decimal totalBalance = (ViewBag.TotalBalance ?? 0m);
+    decimal incomingEMI = (ViewBag.IncomingEMI ?? 0m);
+    int activeLoanCount = (ViewBag.ActiveLoanCount ?? 0);
+
+    var loanSummaries = ViewBag.LoanSummaries as IEnumerable<dynamic>;
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">👤 Customer Dashboard</h3>
+        </div>
+
+        <div class="card-body p-4">
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger text-center">@TempData["Error"]</div>
+            }
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success text-center">@TempData["Success"]</div>
+            }
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5 class="fw-bold text-secondary">Customer Details</h5>
+                    <ul class="list-group shadow-sm">
+                        <li class="list-group-item"><b>Name:</b> @Html.Encode(custName)</li>
+                        <li class="list-group-item"><b>Email:</b> @Html.Encode(custEmail)</li>
+                        <li class="list-group-item"><b>DOB:</b> @Html.Encode(custDob)</li>
+                        <li class="list-group-item"><b>PAN:</b> @Html.Encode(custPAN)</li>
+                        <li class="list-group-item"><b>Created:</b> @Html.Encode(custCreated)</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6">
+                    <h5 class="fw-bold text-secondary">Account Summary</h5>
+                    <ul class="list-group shadow-sm">
+                        <li class="list-group-item"><b>Total Savings Balance:</b> <span class="text-success">₹@totalBalance.ToString("F2")</span></li>
+                        <li class="list-group-item">
+                            <b>Incoming EMI:</b>
+                            @if (incomingEMI > 0m)
+                            {
+                                <span class="text-warning">₹@incomingEMI.ToString("F2")</span>
+                                <span class="text-muted"> (Active loans: @activeLoanCount)</span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">No upcoming EMI</span>
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            @if (loanSummaries != null && loanSummaries.Any())
+            {
+                <div class="mb-4">
+                    <h5 class="fw-bold">Loan Accounts</h5>
+                    <div class="list-group">
+                        @foreach (var ls in loanSummaries)
+                        {
+                            <div class="list-group-item mb-2 shadow-sm">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div><strong>Loan Account ID:</strong> @ls.LoanAccountId</div>
+                                        <div><strong>Loan Amount:</strong> ₹@((decimal)ls.LoanAmount).ToString("F2")</div>
+                                        <div><strong>EMI:</strong> @(ls.EMI != null ? "₹" + ((decimal)ls.EMI).ToString("F2") : "-")</div>
+                                        <div><strong>Outstanding:</strong> <span class="text-danger">₹@((decimal)ls.Outstanding).ToString("F2")</span></div>
+                                    </div>
+                                    <div class="text-end">
+                                        <div><strong>Payments made:</strong> @ls.PaymentsMade</div>
+                                        <div><strong>Total paid:</strong> ₹@((decimal)ls.TotalPaid).ToString("F2")</div>
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <strong>Start Date:</strong> @((DateTime)ls.StartDate).ToString("yyyy-MM-dd")
+                                    </div>
+                                    <div>
+                                        <strong>Next EMI Due:</strong>
+                                        @{
+                                            var nextDue = (DateTime)ls.NextEMIDate;
+                                            if (nextDue.Date <= DateTime.Today)
+                                            {
+                                                <span class="text-danger">Due now / Overdue (@nextDue.ToString("yyyy-MM-dd"))</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">@nextDue.ToString("yyyy-MM-dd")</span>
+                                            }
+                                        }
+                                    </div>
+                                    <div>
+                                        <strong>EMI paid this month:</strong>
+                                        @if ((bool)ls.EMIPaidThisMonth)
+                                        {
+                                            <span class="text-success">Yes ✅</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">No</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            <div class="text-center mt-4 d-flex justify-content-center gap-2 flex-wrap">
+                <a href="@Url.Action("ViewTransactions","Customer")" class="btn btn-info px-4">📄 View Transactions</a>
+                <a href="@Url.Action("Transfer","Customer")" class="btn btn-success px-4">💸 Transfer Money</a>
+                <a href="@Url.Action("PayEMI","Customer")" class="btn btn-warning px-4">💰 Pay EMI</a>
+                <a href="@Url.Action("ResetPassword","Customer")" class="btn btn-outline-secondary px-4">🔑 Reset Password</a>
+            </div>
+        </div>
+    </div>
+</div>

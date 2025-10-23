@@ -39,7 +39,7 @@
     <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EmployeeName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DeptId" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-    <Property Name="PAN" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Boolean" />
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Department" Relationship="Self.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
@@ -177,7 +177,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="MiniBankDBEntities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="MiniBankDBEntities4" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Accounts" EntityType="Self.Account" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
     <EntitySet Name="Departments" EntityType="Self.Department" />

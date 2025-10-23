@@ -1,0 +1,23 @@
+﻿@{
+    var controllerObj = ViewContext.RouteData.Values["controller"];
+    var actionObj = ViewContext.RouteData.Values["action"];
+    var controller = (controllerObj ?? "").ToString();
+    var action = (actionObj ?? "").ToString();
+    var ctlLower = controller.ToLowerInvariant();
+    var actLower = action.ToLowerInvariant();
+
+    // show only for these controllers and not on their Dashboard action
+    var validController = ctlLower == "employee" || ctlLower == "manager" || ctlLower == "customer";
+    var show = validController && actLower != "dashboard";
+
+    var dashboardUrl = show ? Url.Action("Dashboard", controller) : "#";
+}
+@if (show)
+{
+    <div class="position-fixed" style="top:64px; left:16px; z-index:1060;">
+        <a class="btn btn-primary btn-sm shadow rounded-pill d-flex align-items-center px-3" href="@dashboardUrl" title="Back to Dashboard" role="button" aria-label="Back to Dashboard">
+            <span style="font-size:1.1rem; line-height:1;" class="me-2">&#8592;</span>
+            <span class="fw-semibold">Back to Dashboard</span>
+        </a>
+    </div>
+}

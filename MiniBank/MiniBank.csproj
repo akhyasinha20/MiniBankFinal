@@ -189,13 +189,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
@@ -212,6 +205,13 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -231,6 +231,18 @@
     <Content Include="Views\Employee\DepositWithdraw.cshtml" />
     <Content Include="Views\Employee\LoanAccount.cshtml" />
     <Content Include="Views\Employee\Report.cshtml" />
+    <Content Include="Views\Customer\Dashboard.cshtml" />
+    <Content Include="Views\Customer\ResetPassword.cshtml" />
+    <Content Include="Views\Customer\ViewTransactions.cshtml" />
+    <Content Include="Views\Customer\Transfer.cshtml" />
+    <Content Include="Views\Customer\PayEMI.cshtml" />
+    <Content Include="Views\Customer\DepositWithdraw.cshtml" />
+    <Content Include="Views\Employee\CloseAccount.cshtml" />
+    <Content Include="Views\Manager\OpenAccount.cshtml" />
+    <Content Include="Views\Manager\OpenLoanAccount.cshtml" />
+    <Content Include="Views\Manager\DepositWithdraw.cshtml" />
+    <Content Include="Views\Manager\ViewCustomerTransactions.cshtml" />
+    <Content Include="Views\Shared\_DashboardLink.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -240,7 +252,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Customer\" />
+    <Folder Include="ViewModels\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>

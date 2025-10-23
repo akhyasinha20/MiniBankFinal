@@ -1,33 +1,148 @@
-﻿@model IEnumerable<MiniBank.Models.UserRegister>
+﻿
+@model IEnumerable<MiniBank.Models.Customer>
+
 @{
-    ViewBag.Title = "ManageCustomers";
+    ViewBag.Title = "Manage Customers";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<h2 class="text-primary mb-4">Manage Customers</h2>
+<div class="container mt-4">
+    <h3 class="mb-3">Manage Customers</h3>
 
-<table class="table table-hover align-middle">
-    <thead class="table-info">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>PAN</th>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var c in Model)
-        {
-            <tr>
-                <td>@c.CustomerId</td>
-                <td>@c.CustName</td>
-                <td>@c.PAN</td>
-                <td>@c.Email</td>
-                <td>
-                    <a href="@Url.Action("DeactivateCustomer", new { id = c.CustomerId })" class="btn btn-sm btn-danger">Deactivate</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <div class="row">
+        <div class="col-md-6">
+            <h5>All Customers</h5>
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr>
+                        <th>Customer ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var c in Model)
+                        {
+                            <tr>
+                                <td>@c.CustomerId</td>
+                                <td>@c.CustName</td>
+                                <td>@c.Email</td>
+                                <td>
+                                    <a class="btn btn-sm btn-outline-primary" href="@Url.Action("ManageCustomers","Manager", new { customerId = c.CustomerId })">Manage</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <h5>Lookup / Manage by Customer ID</h5>
+            <form method="get" action="@Url.Action("ManageCustomers", "Manager")" class="row g-2">
+                <div class="col-auto">
+                    <input type="number" name="customerId" class="form-control" placeholder="Customer ID" min="1" required />
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary">Lookup</button>
+                </div>
+            </form>
+
+            <hr />
+
+            @{
+                var cust = ViewBag.Customer as MiniBank.Models.Customer;
+                var accounts = ViewBag.Accounts as List<MiniBank.Models.Account>;
+                var savingsMap = ViewBag.SavingsMap as Dictionary<int, MiniBank.Models.SavingsAccount>;
+                var loanMap = ViewBag.LoanMap as Dictionary<int, MiniBank.Models.LoanAccount>;
+            }
+
+            @if (cust != null)
+            {
+                <h6>Customer: @cust.CustName (ID: @cust.CustomerId)</h6>
+
+                if (accounts == null || !accounts.Any())
+                {
+                    <div class="alert alert-info">No accounts linked to this customer.</div>
+
+                    <form method="post" action="@Url.Action("CloseCustomerConfirmed","Manager")">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="customerId" value="@cust.CustomerId" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Remove customer @cust.CustName (ID: @cust.CustomerId)? This cannot be undone.');">Remove Customer</button>
+                        <a class="btn btn-secondary ms-2" href="@Url.Action("ManageCustomers","Manager")">Cancel</a>
+                    </form>
+                }
+                else
+                {
+                    <form method="post" action="@Url.Action("CloseSelectedAccounts","Manager")">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="customerId" value="@cust.CustomerId" />
+
+                        <table class="table table-sm table-bordered mt-2">
+                            <thead>
+                                <tr>
+                                    <th style="width:40px"></th>
+                                    <th>Account ID</th>
+                                    <th>Type</th>
+                                    <th>Balance / Outstanding</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var a in accounts)
+                                {
+                                    <tr>
+                                        <td class="text-center">
+                                            @if (a.AccountType == "Savings")
+                                            {
+                                                <input type="checkbox" name="selectedSavingsIds" value="@a.AccountId" />
+                                            }
+                                            else if (a.AccountType == "Loan")
+                                            {
+                                                <input type="checkbox" name="selectedLoanIds" value="@a.AccountId" />
+                                            }
+                                        </td>
+                                        <td>@a.AccountId</td>
+                                        <td>@a.AccountType</td>
+                                        <td>
+                                            @if (a.AccountType == "Savings")
+                                            {
+                                                var s = savingsMap != null && savingsMap.ContainsKey(a.AccountId) ? savingsMap[a.AccountId] : null;
+                                                @(s != null ? s.Balance.ToString("F2") : "-")
+                                            }
+                                            else
+                                            {
+                                                var l = loanMap != null && loanMap.ContainsKey(a.AccountId) ? loanMap[a.AccountId] : null;
+                                                @(l != null && l.OutstandingAmount.HasValue ? l.OutstandingAmount.Value.ToString("F2") : "-")
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Close selected account(s)?');">Close Selected</button>
+                            <a class="btn btn-secondary" href="@Url.Action("ManageCustomers","Manager")">Cancel / New Lookup</a>
+                        </div>
+                    </form>
+                }
+            }
+            else
+            {
+                <div class="text-muted mt-3">Select a customer from the list or enter a Customer ID to manage accounts.</div>
+            }
+        </div>
+    </div>
+</div>

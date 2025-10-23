@@ -1,84 +1,156 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\",
+  "WorkspaceRootPath": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\employee\\report.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\employee\\report.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\controllers\\managercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\controllers\\managercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\models\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\models\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\customer\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\customer\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\employee\\openaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\employee\\loanaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\employee\\loanaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya.x1\\source\\repos\\minibankproject\\minibankproject\\minibank\\views\\shared\\_dashboardlink.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\shared\\_dashboardlink.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\shared\\_layoutpage1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\shared\\_layoutpage1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\manager\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\manager\\managecustomers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\managecustomers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\manager\\viewtransactions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\viewtransactions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya.x1\\source\\repos\\minibankproject\\minibankproject\\minibank\\views\\manager\\viewcustomertransactions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\viewcustomertransactions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya.x1\\source\\repos\\minibankproject\\minibankproject\\minibank\\views\\manager\\openloanaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\openloanaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya.x1\\source\\repos\\minibankproject\\minibankproject\\minibank\\views\\manager\\depositwithdraw.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\depositwithdraw.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\employee\\report.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\employee\\report.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya.x1\\source\\repos\\minibankproject\\minibankproject\\minibank\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya.x1\\source\\repos\\minibankproject\\minibankproject\\minibank\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya.x1\\source\\repos\\minibankproject\\minibankproject\\minibank\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya.x1\\source\\repos\\minibankproject\\minibankproject\\minibank\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\employee\\closeaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\employee\\closeaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya.x1\\source\\repos\\minibankproject\\minibankproject\\minibank\\views\\manager\\openaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\openaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\employee\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\employee\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\manager\\addemployee.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\addemployee.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya.x1\\source\\repos\\minibankproject\\minibankproject\\minibank\\views\\customer\\viewtransactions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\customer\\viewtransactions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\customer\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\customer\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\customer\\transfer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\customer\\transfer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\customer\\depositwithdraw.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\customer\\depositwithdraw.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\customer\\payemi.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\customer\\payemi.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\models\\savingstransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\models\\savingstransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\C# ViewModels\\TransactionVm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:C# ViewModels\\TransactionVm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\employee\\openaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\employee\\openaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\shared\\_layoutpage1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\shared\\_layoutpage1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\models\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|",
+      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\models\\model1.edmx||{C99AEA30-8E36-4515-B76F-496F5A48A6AA}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\AKHYA\\AppData\\Local\\Temp\\tmp4E44.tmp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\manager\\managecustomers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\managecustomers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\employee\\loanaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\employee\\loanaccount.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\employee\\depositwithdraw.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\views\\employee\\depositwithdraw.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\employee\\depositwithdraw.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\employee\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\employee\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\controllers\\managercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\controllers\\managercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\manager\\viewtransactions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\viewtransactions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\manager\\addemployee.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\addemployee.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\manager\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\manager\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|c:\\users\\akhya\\source\\repos\\minibank\\minibank\\content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "AbsoluteMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\minibank\\content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{014AA0A3-4E2C-40BE-93AA-15AF836C9B14}|MiniBank\\MiniBank.csproj|solutionrelative:minibank\\content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     }
   ],
@@ -89,274 +161,490 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "tmp4E44.tmp.cs",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\AppData\\Local\\Temp\\tmp4E44.tmp.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\tmp4E44.tmp.cs",
-              "ToolTip": "C:\\Users\\AKHYA\\AppData\\Local\\Temp\\tmp4E44.tmp.cs",
-              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\tmp4E44.tmp.cs",
-              "ViewState": "AgIAAPYAAAAAAAAAAAAuwPkAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T18:03:19.371Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "OpenAccount.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Employee\\OpenAccount.cshtml",
-              "RelativeDocumentMoniker": "MiniBank\\Views\\Employee\\OpenAccount.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Employee\\OpenAccount.cshtml",
-              "RelativeToolTip": "MiniBank\\Views\\Employee\\OpenAccount.cshtml",
-              "ViewState": "AgIAACUAAAAAAAAAAAAkwDMAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T16:47:06.17Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EmployeeController.cs",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Controllers\\EmployeeController.cs",
-              "RelativeDocumentMoniker": "MiniBank\\Controllers\\EmployeeController.cs",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Controllers\\EmployeeController.cs*",
-              "RelativeToolTip": "MiniBank\\Controllers\\EmployeeController.cs*",
-              "ViewState": "AgIAAOEAAAAAAAAAAAAAAPMAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T15:55:57.584Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Report.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Employee\\Report.cshtml",
-              "RelativeDocumentMoniker": "MiniBank\\Views\\Employee\\Report.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Employee\\Report.cshtml",
-              "RelativeToolTip": "MiniBank\\Views\\Employee\\Report.cshtml",
-              "ViewState": "AgIAADIAAAAAAAAAAAAjwDoAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T16:54:32.673Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Model1.edmx [Diagram1]",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Models\\Model1.edmx",
-              "RelativeDocumentMoniker": "MiniBank\\Models\\Model1.edmx",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Models\\Model1.edmx [Diagram1]",
-              "RelativeToolTip": "MiniBank\\Models\\Model1.edmx [Diagram1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
-              "WhenOpened": "2025-10-21T15:11:13.931Z",
-              "EditorCaption": " [Diagram1]"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "_LayoutPage1.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Shared\\_LayoutPage1.cshtml",
-              "RelativeDocumentMoniker": "MiniBank\\Views\\Shared\\_LayoutPage1.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Shared\\_LayoutPage1.cshtml",
-              "RelativeToolTip": "MiniBank\\Views\\Shared\\_LayoutPage1.cshtml",
-              "ViewState": "AgIAAB0AAAAAAAAAAAArwCYAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T15:17:33.671Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DepositWithdraw.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Employee\\DepositWithdraw.cshtml",
-              "RelativeDocumentMoniker": "MiniBank\\Views\\Employee\\DepositWithdraw.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Employee\\DepositWithdraw.cshtml",
-              "RelativeToolTip": "MiniBank\\Views\\Employee\\DepositWithdraw.cshtml",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAkwB8AAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T16:48:32.468Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ManageCustomers.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Manager\\ManageCustomers.cshtml",
-              "RelativeDocumentMoniker": "MiniBank\\Views\\Manager\\ManageCustomers.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Manager\\ManageCustomers.cshtml",
-              "RelativeToolTip": "MiniBank\\Views\\Manager\\ManageCustomers.cshtml",
-              "ViewState": "AgIAAA0AAAAAAAAAAAArwBYAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T16:31:20.275Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "LoanAccount.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Employee\\LoanAccount.cshtml",
-              "RelativeDocumentMoniker": "MiniBank\\Views\\Employee\\LoanAccount.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Employee\\LoanAccount.cshtml",
-              "RelativeToolTip": "MiniBank\\Views\\Employee\\LoanAccount.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T16:50:13.588Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Dashboard.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Employee\\Dashboard.cshtml",
-              "RelativeDocumentMoniker": "MiniBank\\Views\\Employee\\Dashboard.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Employee\\Dashboard.cshtml",
-              "RelativeToolTip": "MiniBank\\Views\\Employee\\Dashboard.cshtml",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T16:41:17.651Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AddEmployee.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Manager\\AddEmployee.cshtml",
-              "RelativeDocumentMoniker": "MiniBank\\Views\\Manager\\AddEmployee.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Manager\\AddEmployee.cshtml",
-              "RelativeToolTip": "MiniBank\\Views\\Manager\\AddEmployee.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T16:16:34.536Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ManagerController.cs",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Controllers\\ManagerController.cs",
-              "RelativeDocumentMoniker": "MiniBank\\Controllers\\ManagerController.cs",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Controllers\\ManagerController.cs",
-              "RelativeToolTip": "MiniBank\\Controllers\\ManagerController.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAowDYAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "EmployeeController.cs",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Controllers\\EmployeeController.cs",
+              "RelativeDocumentMoniker": "MiniBank\\Controllers\\EmployeeController.cs",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Controllers\\EmployeeController.cs",
+              "RelativeToolTip": "MiniBank\\Controllers\\EmployeeController.cs",
+              "ViewState": "AgIAANQAAAAAAAAAAAAcwN0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T15:42:51.962Z",
+              "WhenOpened": "2025-10-21T15:55:57.584Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ViewTransactions.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Manager\\ViewTransactions.cshtml",
-              "RelativeDocumentMoniker": "MiniBank\\Views\\Manager\\ViewTransactions.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Manager\\ViewTransactions.cshtml",
-              "RelativeToolTip": "MiniBank\\Views\\Manager\\ViewTransactions.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAA==",
+              "DocumentIndex": 13,
+              "Title": "Report.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\Report.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Employee\\Report.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\Report.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Employee\\Report.cshtml",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAADwAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T16:20:35.977Z",
+              "WhenOpened": "2025-10-21T16:54:32.673Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 0,
               "Title": "CustomerController.cs",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Controllers\\CustomerController.cs",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Controllers\\CustomerController.cs",
               "RelativeDocumentMoniker": "MiniBank\\Controllers\\CustomerController.cs",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Controllers\\CustomerController.cs",
-              "RelativeToolTip": "MiniBank\\Controllers\\CustomerController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFsAAAA6AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Controllers\\CustomerController.cs*",
+              "RelativeToolTip": "MiniBank\\Controllers\\CustomerController.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-21T16:04:56.061Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 3,
               "Title": "Dashboard.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Manager\\Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Customer\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\Dashboard.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Customer\\Dashboard.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-22T06:55:15.67Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ManagerController.cs",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Controllers\\ManagerController.cs",
+              "RelativeDocumentMoniker": "MiniBank\\Controllers\\ManagerController.cs",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Controllers\\ManagerController.cs",
+              "RelativeToolTip": "MiniBank\\Controllers\\ManagerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T15:42:51.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoanAccount.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\LoanAccount.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Employee\\LoanAccount.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\LoanAccount.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Employee\\LoanAccount.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T16:50:13.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_DashboardLink.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Shared\\_DashboardLink.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Shared\\_DashboardLink.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Shared\\_DashboardLink.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Shared\\_DashboardLink.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-23T09:49:00.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ViewTransactions.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\ViewTransactions.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Manager\\ViewTransactions.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\ViewTransactions.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Manager\\ViewTransactions.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T16:20:35.977Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_LayoutPage1.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Shared\\_LayoutPage1.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Shared\\_LayoutPage1.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Shared\\_LayoutPage1.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Shared\\_LayoutPage1.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T15:17:33.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\Dashboard.cshtml",
               "RelativeDocumentMoniker": "MiniBank\\Views\\Manager\\Dashboard.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Manager\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\Dashboard.cshtml",
               "RelativeToolTip": "MiniBank\\Views\\Manager\\Dashboard.cshtml",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAkwCIAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-21T16:10:42.032Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "MiniBank\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "MiniBank\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAYwDAAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T15:25:00.299Z",
+              "DocumentIndex": 8,
+              "Title": "ManageCustomers.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\ManageCustomers.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Manager\\ManageCustomers.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\ManageCustomers.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Manager\\ManageCustomers.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEsAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T16:31:20.275Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "MiniBank\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "MiniBank\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-21T15:55:26.105Z",
+              "DocumentIndex": 12,
+              "Title": "DepositWithdraw.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\DepositWithdraw.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Manager\\DepositWithdraw.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\DepositWithdraw.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Manager\\DepositWithdraw.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-23T04:59:15.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ViewCustomerTransactions.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\ViewCustomerTransactions.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Manager\\ViewCustomerTransactions.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\ViewCustomerTransactions.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Manager\\ViewCustomerTransactions.cshtml",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAACgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-23T05:00:48.018Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 17,
-              "Title": "Register.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Auth\\Register.cshtml",
-              "RelativeDocumentMoniker": "MiniBank\\Views\\Auth\\Register.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Auth\\Register.cshtml",
-              "RelativeToolTip": "MiniBank\\Views\\Auth\\Register.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAGAAAAAAAAAA==",
+              "Title": "RouteConfig.cs",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\App_Start\\RouteConfig.cs",
+              "RelativeDocumentMoniker": "MiniBank\\App_Start\\RouteConfig.cs",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\App_Start\\RouteConfig.cs",
+              "RelativeToolTip": "MiniBank\\App_Start\\RouteConfig.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T07:20:43.661Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "OpenLoanAccount.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\OpenLoanAccount.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Manager\\OpenLoanAccount.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\OpenLoanAccount.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Manager\\OpenLoanAccount.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACUAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-21T15:33:58.572Z",
+              "WhenOpened": "2025-10-23T04:58:31.318Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Global.asax.cs",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Global.asax.cs",
+              "RelativeDocumentMoniker": "MiniBank\\Global.asax.cs",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Global.asax.cs",
+              "RelativeToolTip": "MiniBank\\Global.asax.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T07:21:35.711Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "packages.config",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\packages.config",
+              "RelativeDocumentMoniker": "MiniBank\\packages.config",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\packages.config",
+              "RelativeToolTip": "MiniBank\\packages.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-10-23T07:21:47.387Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Web.config",
+              "RelativeDocumentMoniker": "MiniBank\\Web.config",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Web.config",
+              "RelativeToolTip": "MiniBank\\Web.config",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-10-23T07:21:51.55Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "OpenAccount.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\OpenAccount.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Manager\\OpenAccount.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\OpenAccount.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Manager\\OpenAccount.cshtml",
+              "ViewState": "AgIAABEAAAAAAAAAAADwvx4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-23T04:52:02.311Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 18,
+              "Title": "CloseAccount.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\CloseAccount.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Employee\\CloseAccount.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\CloseAccount.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Employee\\CloseAccount.cshtml",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAADAAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-22T12:13:49.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Employee\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\Dashboard.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Employee\\Dashboard.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T16:41:17.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Auth\\Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Auth\\Login.cshtml",
               "RelativeDocumentMoniker": "MiniBank\\Views\\Auth\\Login.cshtml",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Views\\Auth\\Login.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Auth\\Login.cshtml",
               "RelativeToolTip": "MiniBank\\Views\\Auth\\Login.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAAGAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-21T15:33:40.404Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 23,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "MiniBank\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "MiniBank\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T15:25:00.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "AddEmployee.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\AddEmployee.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Manager\\AddEmployee.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Manager\\AddEmployee.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Manager\\AddEmployee.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T16:16:34.536Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ResetPassword.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\ResetPassword.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Customer\\ResetPassword.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\ResetPassword.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Customer\\ResetPassword.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABAAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-22T06:58:10.559Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "PayEMI.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\PayEMI.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Customer\\PayEMI.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\PayEMI.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Customer\\PayEMI.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-22T07:01:26.737Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ViewTransactions.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\ViewTransactions.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Customer\\ViewTransactions.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\ViewTransactions.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Customer\\ViewTransactions.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-22T06:59:24.709Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "tmp4E44.tmp.cs",
+              "DocumentMoniker": "C:\\Users\\AKHYA\\AppData\\Local\\Temp\\tmp4E44.tmp.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\AKHYA\\AppData\\Local\\Temp\\tmp4E44.tmp.cs",
+              "ToolTip": "C:\\Users\\AKHYA\\AppData\\Local\\Temp\\tmp4E44.tmp.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\AKHYA\\AppData\\Local\\Temp\\tmp4E44.tmp.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T18:03:19.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "TransactionVm.cs",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\C# ViewModels\\TransactionVm.cs",
+              "RelativeDocumentMoniker": "C# ViewModels\\TransactionVm.cs",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\C# ViewModels\\TransactionVm.cs",
+              "RelativeToolTip": "C# ViewModels\\TransactionVm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T06:05:57.866Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DepositWithdraw.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\DepositWithdraw.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Customer\\DepositWithdraw.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\DepositWithdraw.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Customer\\DepositWithdraw.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-22T08:59:36.129Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Transfer.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\Transfer.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Customer\\Transfer.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Customer\\Transfer.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Customer\\Transfer.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-22T07:00:44.876Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "SavingsTransaction.cs",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Models\\SavingsTransaction.cs",
+              "RelativeDocumentMoniker": "MiniBank\\Models\\SavingsTransaction.cs",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Models\\SavingsTransaction.cs",
+              "RelativeToolTip": "MiniBank\\Models\\SavingsTransaction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAIAwwA4AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T06:44:06.158Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Auth\\Register.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Auth\\Register.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Auth\\Register.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Auth\\Register.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T15:33:58.572Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "OpenAccount.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\OpenAccount.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Employee\\OpenAccount.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\OpenAccount.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Employee\\OpenAccount.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T16:47:06.17Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "MiniBank\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "MiniBank\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T15:55:26.105Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Model1.edmx [Diagram1]",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Models\\Model1.edmx",
+              "RelativeDocumentMoniker": "MiniBank\\Models\\Model1.edmx",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Models\\Model1.edmx [Diagram1]",
+              "RelativeToolTip": "MiniBank\\Models\\Model1.edmx [Diagram1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001116|",
+              "WhenOpened": "2025-10-22T05:02:36.633Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "DepositWithdraw.cshtml",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\DepositWithdraw.cshtml",
+              "RelativeDocumentMoniker": "MiniBank\\Views\\Employee\\DepositWithdraw.cshtml",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Views\\Employee\\DepositWithdraw.cshtml",
+              "RelativeToolTip": "MiniBank\\Views\\Employee\\DepositWithdraw.cshtml",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAkwB8AAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-21T16:48:32.468Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
               "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Content\\site.css",
+              "DocumentMoniker": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Content\\site.css",
               "RelativeDocumentMoniker": "MiniBank\\Content\\site.css",
-              "ToolTip": "C:\\Users\\AKHYA\\source\\repos\\MiniBank\\MiniBank\\Content\\site.css",
+              "ToolTip": "C:\\Users\\akhya.x1\\source\\repos\\MiniBankProject\\MiniBankProject\\MiniBank\\Content\\site.css",
               "RelativeToolTip": "MiniBank\\Content\\site.css",
               "ViewState": "AgIAABsAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-21T15:20:20.993Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-21T15:20:20.993Z"
             }
           ]
         }

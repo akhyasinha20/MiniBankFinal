@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "PayEMI";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<div class="card shadow-sm p-4 mt-4">
+    <h3 class="text-info mb-3">Pay Loan EMI</h3>
+
+    <form method="post">
+        <div class="mb-3">
+            <label>Loan Account ID</label>
+            <input type="number" name="loanId" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label>Amount (₹)</label>
+            <input type="number" name="amount" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-info w-100">Pay EMI</button>
+
+        <div class="text-danger mt-3">@ViewBag.Error</div>
+        <div class="text-success mt-3">@ViewBag.Message</div>
+    </form>
+</div><h2>PayEMI</h2>
+

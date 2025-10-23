@@ -7,6 +7,15 @@
 
 <h2 class="text-primary mb-4">Manage Employees</h2>
 
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
 <table class="table table-hover align-middle">
     <thead class="table-primary">
         <tr>
@@ -25,7 +34,7 @@
                 <td>@emp.Username</td>
                 <td>@emp.Email</td>
                 <td>
-                    @if ((bool)emp.IsActive)
+                    @if (emp.IsActive == true)
                     {
                         <span class="badge bg-success">Active</span>
                     }
@@ -35,11 +44,23 @@
                     }
                 </td>
                 <td>
-                    @if (!(bool)emp.IsActive)
+                    @if (emp.IsActive != true)
                     {
-                        <a href="@Url.Action("Approve", new { id = emp.UserId })" class="btn btn-sm btn-success">Approve</a>
+                        using (Html.BeginForm("Approve", "Manager", FormMethod.Post, new System.Collections.Generic.Dictionary<string, object> { { "class", "d-inline" } }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("id", emp.UserId)
+                            <button type="submit" class="btn btn-sm btn-success">Approve</button>
+                        }
                     }
-                    <a href="@Url.Action("Remove", new { id = emp.UserId })" class="btn btn-sm btn-danger">Remove</a>
+
+                    @using (Html.BeginForm("Remove", "Manager", FormMethod.Post, new System.Collections.Generic.Dictionary<string, object>
+                        { { "class", "d-inline ml-2" } }))
+                        {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", emp.UserId)
+                        <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                        }
                 </td>
             </tr>
         }

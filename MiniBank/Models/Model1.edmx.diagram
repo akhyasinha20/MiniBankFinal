@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="03fbe456e76c41b3b7186b536f3d91ef" Name="Diagram1">
+      <Diagram DiagramId="7d7e4b7978754410abb3bf3b4af61d7b" Name="Diagram1">
         <EntityTypeShape EntityType="MiniBankDBModel.Account" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="MiniBankDBModel.Customer" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="MiniBankDBModel.Department" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />

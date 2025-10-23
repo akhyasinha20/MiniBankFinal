@@ -1,36 +1,47 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Dashboard";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-
 <div class="container mt-4">
     <h2 class="fw-bold text-primary mb-4">Manager Dashboard</h2>
 
-    <div class="row text-center g-4">
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0 bg-light">
-                <div class="card-body">
-                    <h5>Total Employees</h5>
-                    <h2 class="text-success fw-bold">@ViewBag.TotalEmployees</h2>
-                    <a href="@Url.Action("AddEmployee")" class="btn btn-outline-primary mt-3 w-100">Manage Employees</a>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6>Total Employees</h6>
+                    <h2 class="text-success">@ViewBag.TotalEmployees</h2>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0 bg-light">
-                <div class="card-body">
-                    <h5>Total Customers</h5>
-                    <h2 class="text-info fw-bold">@ViewBag.TotalCustomers</h2>
-                    <a href="@Url.Action("ManageCustomers")" class="btn btn-outline-info mt-3 w-100">Manage Customers</a>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6>Total Customers</h6>
+                    <h2 class="text-info">@ViewBag.TotalCustomers</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6>Total Loan Accounts</h6>
+                    <h2 class="text-warning">@ViewBag.TotalLoanAccounts</h2>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="text-center mt-5">
-        <a href="@Url.Action("ViewTransactions")" class="btn btn-secondary px-4">View Transactions</a>
+    <div class="row text-center g-3 mt-4">
+        <div class="col-md-3"><a class="btn btn-outline-primary w-100" href="@Url.Action("OpenAccount","Manager")">Open Savings Account</a></div>
+        <div class="col-md-3"><a class="btn btn-outline-info w-100" href="@Url.Action("OpenLoanAccount","Manager")">Open Loan Account</a></div>
+        <div class="col-md-3"><a class="btn btn-outline-success w-100" href="@Url.Action("DepositWithdraw","Manager")">Deposit / Withdraw</a></div>
+        <div class="col-md-3"><a class="btn btn-outline-secondary w-100" href="@Url.Action("ViewTransactions","Manager")">All Transactions</a></div>
+    </div>
+
+    <div class="mt-4">
+        <a class="btn btn-outline-dark" href="@Url.Action("ManageCustomers","Manager")">Manage Customers</a>
+        <a class="btn btn-outline-primary ms-2" href="@Url.Action("AddEmployee","Manager")">Manage Employees</a>
     </div>
 </div>
-

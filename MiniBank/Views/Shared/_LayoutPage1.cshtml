@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,6 +9,7 @@
     <link href="~/Content/site.css" rel="stylesheet" />
 </head>
 <body>
+    @Html.Partial("_DashboardLink")
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="@Url.Action("Index","Home")">MiniBank</a>
@@ -17,9 +17,21 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Login","Auth")">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Register","Auth")">Register</a></li>
+                <ul class="navbar-nav ms-auto align-items-center">
+                    @if (Session["Username"] != null)
+                    {
+                        <li class="nav-item me-3">
+                            <span class="navbar-text text-light">Welcome, <strong>@Session["Username"]</strong></span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Logout","Auth")">Logout</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Login","Auth")">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Register","Auth")">Register</a></li>
+                    }
                 </ul>
             </div>
         </div>
@@ -35,5 +47,4 @@
 
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
 </body>
-</html>
 </html>

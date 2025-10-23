@@ -1,3 +1,5 @@
+use master;
+drop database MiniBankDB
 CREATE DATABASE MiniBankDB;
 
 USE MiniBankDB;
@@ -14,12 +16,15 @@ CREATE TABLE Employee (
     EmpId INT IDENTITY(10000,1) PRIMARY KEY,
     EmployeeName NVARCHAR(150) NOT NULL,
     DeptId NVARCHAR(6) NULL,
-    PAN NVARCHAR(10) UNIQUE NOT NULL,
+    Email NVARCHAR(50) UNIQUE NOT NULL,
     IsActive BIT DEFAULT 0,
     CreatedAt DATETIME DEFAULT GETDATE(),
     CONSTRAINT FK_Employee_Department FOREIGN KEY (DeptId) REFERENCES Department(DeptId)
 );
-
+alter table Employee ALTER COLUMN Email NVARCHAR(50);
+insert into Employee(EmployeeName,DeptId,Email,IsActive)Values('Nandini','DEPT01','nandini@gmail.com',1)
+select * from Employee
+EXEC sp_help 'Employee'
 CREATE TABLE Customer (
     CustomerId INT IDENTITY(1000,1) PRIMARY KEY,
     CustName NVARCHAR(150) NOT NULL,
@@ -28,7 +33,8 @@ CREATE TABLE Customer (
     Email NVARCHAR(150),
     CreatedAt DATETIME DEFAULT GETDATE()
 );
-
+select * from Customer
+select * from SavingsAccount
 CREATE TABLE Account (
     AccountId INT IDENTITY(10000,1) PRIMARY KEY,
     AccountType NVARCHAR(20) CHECK (AccountType IN ('Savings','Loan')),
@@ -44,6 +50,8 @@ CREATE TABLE SavingsAccount (
     MinBalance DECIMAL(18,2) NOT NULL DEFAULT 1000,
     CONSTRAINT FK_SavingsAccount_Account FOREIGN KEY (AccountId) REFERENCES Account(AccountId)
 );
+select* from SavingsAccount
+select * from LoanAccount
 select * from SavingsTransaction
 
 CREATE TABLE SavingsTransaction (
@@ -87,3 +95,10 @@ CREATE TABLE UserRegister (
     IsActive BIT DEFAULT 0,
     CreatedAt DATETIME DEFAULT GETDATE()
 );
+select * from UserRegister
+select * from SavingsTransaction
+select * from Customer
+SELECT * FROM Account
+select * from SavingsAccount
+select * from LoanAccount
+

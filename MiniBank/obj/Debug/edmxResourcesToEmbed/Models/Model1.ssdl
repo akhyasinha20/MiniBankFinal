@@ -34,7 +34,7 @@
     <Property Name="EmpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="EmployeeName" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="DeptId" Type="nvarchar" MaxLength="6" />
-    <Property Name="PAN" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="IsActive" Type="bit" />
     <Property Name="CreatedAt" Type="datetime" />
   </EntityType>

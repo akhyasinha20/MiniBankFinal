@@ -1,0 +1,48 @@
+﻿
+@*@{
+    ViewBag.Title = "DepositWithdraw";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">💰 Deposit / Withdraw Money</h3>
+        </div>
+
+        <div class="card-body p-4">
+            <form method="post" class="row g-3">
+
+                <div class="col-md-6">
+                    <label for="accountId" class="form-label fw-semibold">Account ID</label>
+                    <input type="text" id="accountId" name="accountId" class="form-control" placeholder="Enter your Account ID" required />
+                </div>
+
+                <div class="col-md-6">
+                    <label for="transactionType" class="form-label fw-semibold">Transaction Type</label>
+                    <select id="transactionType" name="transactionType" class="form-select" required>
+                        <option value="">Select Type</option>
+                        <option value="Deposit">Deposit</option>
+                        <option value="Withdraw">Withdraw</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="amount" class="form-label fw-semibold">Amount (₹)</label>
+                    <input type="number" id="amount" name="amount" class="form-control" placeholder="Enter amount" required min="1" />
+                </div>
+
+                <div class="col-12 text-center mt-4">
+                    <button type="submit" class="btn btn-success px-5 fw-bold">Submit</button>
+                </div>
+            </form>
+
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info mt-4 text-center fw-semibold">
+                    @ViewBag.Message
+                </div>
+            }
+        </div>
+    </div>
+</div>*@
