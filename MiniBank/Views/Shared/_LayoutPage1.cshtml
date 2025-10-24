@@ -10,12 +10,26 @@
 </head>
 <body>
     @Html.Partial("_DashboardLink")
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="@Url.Action("Index","Home")">MiniBank</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <a class="navbar-brand" aria-label="MiniBank home">
+                <span class="brand-badge" aria-hidden="true">
+                    @* Inline SVG logo (bank shield) *@
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false" role="img" aria-hidden="true">
+                        <rect x="3" y="6" width="18" height="11" rx="2" fill="#c9a14a" />
+                        <path d="M12 2L3 6v5c0 6 4.5 9 9 11 4.5-2 9-5 9-11V6l-9-4z" fill="#ffffff" opacity="0.08" />
+                        <path d="M12 3.2L4.2 6.5v4.9c0 5.3 3.9 8 7.8 9.6 3.9-1.6 7.8-4.3 7.8-9.6V6.5L12 3.2z" fill="#fff" />
+                        <path d="M8 10h8v2H8z" fill="#0b3d91" opacity="0.9" />
+                    </svg>
+                </span>
+                <span>MiniBank</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     @if (Session["Username"] != null)
@@ -41,9 +55,7 @@
         @RenderBody()
     </main>
 
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        MiniBank © @DateTime.Now.Year
-    </footer>
+   
 
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
 </body>

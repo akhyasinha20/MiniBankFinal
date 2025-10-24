@@ -6,27 +6,13 @@ using System.Web;
 using System.Web.Mvc;
 using MiniBank.Models;
 using System.Data.Entity;
+using System.Dynamic;
 
 namespace MiniBank.Controllers
 {
     public class CustomerController : Controller
     {
         private MiniBankDBEntities4 db = new MiniBankDBEntities4();
-
-        // helper DTO used for dashboard
-        private class LoanSummary
-        {
-            public int LoanAccountId { get; set; }
-            public decimal LoanAmount { get; set; }
-            public decimal? EMI { get; set; }
-            public decimal Outstanding { get; set; }
-            public DateTime StartDate { get; set; }
-            public int TenureMonths { get; set; }
-            public int PaymentsMade { get; set; }
-            public decimal TotalPaid { get; set; }
-            public bool EMIPaidThisMonth { get; set; }
-            public DateTime NextEMIDate { get; set; }
-        }
 
         // GET: Customer Dashboard
         public ActionResult Dashboard()
@@ -53,12 +39,12 @@ namespace MiniBank.Controllers
                     .Sum(v => v.Value);
             }
 
-            // Loan accounts and summaries
+            // Loan accounts and summaries (use ExpandoObject so view can access properties via dynamic)
             var loanAccounts = db.LoanAccounts
                 .Where(l => accountIds.Contains(l.AccountId))
                 .ToList();
 
-            var loanSummaries = new List<LoanSummary>();
+            var loanSummaries = new List<dynamic>();
             foreach (var l in loanAccounts)
             {
                 var loanId = l.AccountId;
@@ -87,19 +73,19 @@ namespace MiniBank.Controllers
                     nextDue = start.AddMonths(Math.Max(1, paymentsMade + 1));
                 }
 
-                loanSummaries.Add(new LoanSummary
-                {
-                    LoanAccountId = loanId,
-                    LoanAmount = l.LoanAmount,
-                    EMI = l.EMI,
-                    Outstanding = l.OutstandingAmount ?? 0m,
-                    StartDate = start,
-                    TenureMonths = l.TenureMonths,
-                    PaymentsMade = paymentsMade,
-                    TotalPaid = totalPaid,
-                    EMIPaidThisMonth = emiPaidThisMonth,
-                    NextEMIDate = nextDue
-                });
+                dynamic exp = new ExpandoObject();
+                exp.LoanAccountId = loanId;
+                exp.LoanAmount = l.LoanAmount;
+                exp.EMI = l.EMI;
+                exp.Outstanding = l.OutstandingAmount ?? 0m;
+                exp.StartDate = start;
+                exp.TenureMonths = l.TenureMonths;
+                exp.PaymentsMade = paymentsMade;
+                exp.TotalPaid = totalPaid;
+                exp.EMIPaidThisMonth = emiPaidThisMonth;
+                exp.NextEMIDate = nextDue;
+
+                loanSummaries.Add(exp);
             }
 
             // Prepare ViewBag
@@ -113,8 +99,27 @@ namespace MiniBank.Controllers
             ViewBag.LoanMap = db.LoanAccounts.Where(l => accountIds.Contains(l.AccountId)).ToDictionary(l => l.AccountId);
             ViewBag.TotalBalance = totalBalance;
             ViewBag.LoanSummaries = loanSummaries;
-            ViewBag.IncomingEMI = loanSummaries.Where(s => s.EMI.HasValue).Select(s => s.EMI ?? 0m).Sum();
-            ViewBag.ActiveLoanCount = loanSummaries.Count(s => s.Outstanding > 0m);
+
+            // compute incoming EMI and active loan count from the dynamic list (avoid relying on dynamic LINQ)
+            decimal incomingEMI = 0m;
+            int activeLoanCount = 0;
+            foreach (var s in loanSummaries)
+            {
+                try
+                {
+                    if (s.EMI != null) incomingEMI += (decimal)s.EMI;
+                }
+                catch { /* ignore unexpected types */ }
+
+                try
+                {
+                    if ((decimal)s.Outstanding > 0m) activeLoanCount++;
+                }
+                catch { /* ignore unexpected types */ }
+            }
+
+            ViewBag.IncomingEMI = incomingEMI;
+            ViewBag.ActiveLoanCount = activeLoanCount;
 
             return View();
         }

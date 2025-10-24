@@ -1,33 +1,62 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "DepositWithdraw";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<div class="card shadow-sm p-4 mt-4">
-    <h3 class="mb-3 text-success">Deposit / Withdraw Money</h3>
+<div class="card single-card-centered mt-4">
+    <div class="card-body p-4">
+        <div class="d-flex align-items-start gap-3 mb-3">
+            <div class="hero-illustration">
+                <div class="ill" aria-hidden="true">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="4" width="20" height="16" rx="2" fill="#0b3d91" opacity="0.08" />
+                        <circle cx="16" cy="11" r="2" fill="#c9a14a" />
+                        <path d="M4 9h8" stroke="#0b3d91" stroke-width="1.2" stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
 
-    <form method="post">
-        <div class="mb-3">
-            <label>Account ID</label>
-            <input type="number" name="accountId" class="form-control" required />
-        </div>
-        <div class="mb-3">
-            <label>Transaction Type</label>
-            <select name="type" class="form-select">
-                <option>Deposit</option>
-                <option>Withdrawal</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label>Amount (₹)</label>
-            <input type="number" name="amount" class="form-control" required />
+            <div>
+                <h3 class="mb-1 text-primary">Deposit / Withdraw</h3>
+                <div class="text-muted small">Process deposits or withdrawals against a customer's savings account.</div>
+            </div>
+
+           
         </div>
 
-        <button type="submit" class="btn btn-success w-100">Submit</button>
+        <form method="post" class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Account ID</label>
+                <input type="number" name="accountId" class="form-control" required />
+            </div>
 
-        <div class="text-danger mt-3">@ViewBag.Error</div>
-        <div class="text-success mt-3">@ViewBag.Message</div>
-    </form>
+            <div class="col-md-6">
+                <label class="form-label">Transaction Type</label>
+                <select name="type" class="form-select">
+                    <option>Deposit</option>
+                    <option>Withdrawal</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Amount (₹)</label>
+                <input type="number" name="amount" class="form-control" required />
+            </div>
+
+            <div class="col-md-6 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </div>
+
+            <div class="col-12">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger mt-2">@ViewBag.Error</div>
+                }
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-success mt-2">@ViewBag.Message</div>
+                }
+            </div>
+        </form>
+    </div>
 </div>
-

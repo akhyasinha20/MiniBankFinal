@@ -1,57 +1,55 @@
-﻿
-@model IEnumerable<MiniBank.Models.Customer>
+﻿@model IEnumerable<MiniBank.Models.Customer>
 
 @{
     ViewBag.Title = "Manage Customers";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<div class="container mt-4">
-    <h3 class="mb-3">Manage Customers</h3>
+<div class="card p-4 mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0 text-primary">Manage Customers</h3>
+        <a class="btn btn-outline-accent btn-sm" href="@Url.Action("Dashboard","Manager")">Back</a>
+    </div>
 
     @if (TempData["Error"] != null)
-    {
-        <div class="alert alert-danger">@TempData["Error"]</div>
-    }
+    {<div class="alert alert-danger">@TempData["Error"]</div>}
     @if (TempData["Success"] != null)
-    {
-        <div class="alert alert-success">@TempData["Success"]</div>
-    }
+    {<div class="alert alert-success">@TempData["Success"]</div>}
 
     <div class="row">
         <div class="col-md-6">
             <h5>All Customers</h5>
-            <table class="table table-sm table-bordered">
-                <thead>
-                    <tr>
-                        <th>Customer ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model != null)
-                    {
-                        foreach (var c in Model)
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
                         {
-                            <tr>
-                                <td>@c.CustomerId</td>
-                                <td>@c.CustName</td>
-                                <td>@c.Email</td>
-                                <td>
-                                    <a class="btn btn-sm btn-outline-primary" href="@Url.Action("ManageCustomers","Manager", new { customerId = c.CustomerId })">Manage</a>
-                                </td>
-                            </tr>
+                            foreach (var c in Model)
+                            {
+                                <tr>
+                                    <td>@c.CustomerId</td>
+                                    <td>@c.CustName</td>
+                                    <td>@c.Email</td>
+                                    <td><a class="btn btn-sm btn-outline-primary" href="@Url.Action("ManageCustomers","Manager", new { customerId = c.CustomerId })">Manage</a></td>
+                                </tr>
+                            }
                         }
-                    }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="col-md-6">
             <h5>Lookup / Manage by Customer ID</h5>
-            <form method="get" action="@Url.Action("ManageCustomers", "Manager")" class="row g-2">
+            <form method="get" action="@Url.Action("ManageCustomers", "Manager")" class="row g-2 mb-3">
                 <div class="col-auto">
                     <input type="number" name="customerId" class="form-control" placeholder="Customer ID" min="1" required />
                 </div>
@@ -90,49 +88,51 @@
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="customerId" value="@cust.CustomerId" />
 
-                        <table class="table table-sm table-bordered mt-2">
-                            <thead>
-                                <tr>
-                                    <th style="width:40px"></th>
-                                    <th>Account ID</th>
-                                    <th>Type</th>
-                                    <th>Balance / Outstanding</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var a in accounts)
-                                {
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered mt-2">
+                                <thead class="table-light">
                                     <tr>
-                                        <td class="text-center">
-                                            @if (a.AccountType == "Savings")
-                                            {
-                                                <input type="checkbox" name="selectedSavingsIds" value="@a.AccountId" />
-                                            }
-                                            else if (a.AccountType == "Loan")
-                                            {
-                                                <input type="checkbox" name="selectedLoanIds" value="@a.AccountId" />
-                                            }
-                                        </td>
-                                        <td>@a.AccountId</td>
-                                        <td>@a.AccountType</td>
-                                        <td>
-                                            @if (a.AccountType == "Savings")
-                                            {
-                                                var s = savingsMap != null && savingsMap.ContainsKey(a.AccountId) ? savingsMap[a.AccountId] : null;
-                                                @(s != null ? s.Balance.ToString("F2") : "-")
-                                            }
-                                            else
-                                            {
-                                                var l = loanMap != null && loanMap.ContainsKey(a.AccountId) ? loanMap[a.AccountId] : null;
-                                                @(l != null && l.OutstandingAmount.HasValue ? l.OutstandingAmount.Value.ToString("F2") : "-")
-                                            }
-                                        </td>
+                                        <th style="width:40px"></th>
+                                        <th>Account ID</th>
+                                        <th>Type</th>
+                                        <th>Balance / Outstanding</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var a in accounts)
+                                    {
+                                        <tr>
+                                            <td class="text-center">
+                                                @if (a.AccountType == "Savings")
+                                                {
+                                                    <input type="checkbox" name="selectedSavingsIds" value="@a.AccountId" />
+                                                }
+                                                else if (a.AccountType == "Loan")
+                                                {
+                                                    <input type="checkbox" name="selectedLoanIds" value="@a.AccountId" />
+                                                }
+                                            </td>
+                                            <td>@a.AccountId</td>
+                                            <td>@a.AccountType</td>
+                                            <td>
+                                                @if (a.AccountType == "Savings")
+                                                {
+                                                    var s = savingsMap != null && savingsMap.ContainsKey(a.AccountId) ? savingsMap[a.AccountId] : null;
+                                                    @(s != null ? s.Balance.ToString("F2") : "-")
+                                                }
+                                                else
+                                                {
+                                                    var l = loanMap != null && loanMap.ContainsKey(a.AccountId) ? loanMap[a.AccountId] : null;
+                                                    @(l != null && l.OutstandingAmount.HasValue ? l.OutstandingAmount.Value.ToString("F2") : "-")
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
 
-                        <div class="d-flex gap-2">
+                        <div class="d-flex gap-2 mt-2">
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Close selected account(s)?');">Close Selected</button>
                             <a class="btn btn-secondary" href="@Url.Action("ManageCustomers","Manager")">Cancel / New Lookup</a>
                         </div>

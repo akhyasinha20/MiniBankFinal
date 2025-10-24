@@ -3,51 +3,65 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<div class="card shadow-sm p-4 mt-4">
-    <h3 class="mb-3 text-primary">Open New Savings Account</h3>
+<div class="card single-card-centered mt-4">
+    <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <h3 class="mb-1 text-primary">Open New Savings Account</h3>
+                <div class="text-muted small">Create a customer and their savings account</div>
+            </div>
+            
+        </div>
 
-    <form method="post">
-        @if (ViewBag.Step == null || ViewBag.Step == 1)
-        {
-            <!-- Step 1: Ask for PAN -->
-            <div class="mb-3">
-                <label class="form-label">PAN Number</label>
-                <input type="text" name="pan" class="form-control" required value="@(ViewBag.PAN ?? string.Empty)" />
-            </div>
-        }
-        else if (ViewBag.Step == 2)
-        {
-            <!-- Step 2: Ask for additional details -->
-            <input type="hidden" name="pan" value="@ViewBag.PAN" />
-            <div class="mb-3">
-                <label class="form-label">Customer Name</label>
-                <input type="text" name="name" class="form-control" required pattern="[A-Za-z]+" title="Only alphabets allowed" value="@(ViewBag.Name ?? string.Empty)" />
-                <div class="form-text text-muted">Only letters (A-Z, a-z) are allowed.</div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Date of Birth</label>
-                <input type="date" name="dob" class="form-control" required max="@DateTime.Now.ToString("yyyy-MM-dd")" value="@(ViewBag.DOB ?? string.Empty)" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" required value="@(ViewBag.Email ?? string.Empty)" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Minimum Balance</label>
-                <input type="number" name="minBalance" class="form-control" min="1000" required value="@(ViewBag.MinBalance ?? string.Empty)" />
-                <small class="text-muted">Minimum balance must be ₹1000 or more.</small>
-            </div>
-        }
+        <form method="post" class="row g-3">
+            @if (ViewBag.Step == null || ViewBag.Step == 1)
+            {
+                <div class="col-12">
+                    <label class="form-label">PAN Number</label>
+                    <input type="text" name="pan" class="form-control" required value="@(ViewBag.PAN ?? string.Empty)" />
+                    <div class="form-text text-muted">Enter customer's PAN to check for an existing account.</div>
+                </div>
 
-        <button type="submit" class="btn btn-primary w-100">Submit</button>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary w-100">Next</button>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" name="pan" value="@ViewBag.PAN" />
+                <div class="col-md-6">
+                    <label class="form-label">Customer Name</label>
+                    <input type="text" name="name" class="form-control" required pattern="[A-Za-z]+" title="Only alphabets allowed" value="@(ViewBag.Name ?? string.Empty)" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" required value="@(ViewBag.Email ?? string.Empty)" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Date of Birth</label>
+                    <input type="date" name="dob" class="form-control" required max="@DateTime.Now.ToString("yyyy-MM-dd")" value="@(ViewBag.DOB ?? string.Empty)" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Initial Deposit (₹)</label>
+                    <input type="number" name="minBalance" class="form-control" min="1000" required value="@(ViewBag.MinBalance ?? string.Empty)" />
+                    <div class="form-text text-muted">Minimum allowed ₹1000.</div>
+                </div>
 
-        @if (ViewBag.Error != null)
-        {
-            <div class="alert alert-danger mt-3">@ViewBag.Error</div>
-        }
-        @if (ViewBag.Message != null)
-        {
-            <div class="alert alert-success mt-3">@ViewBag.Message</div>
-        }
-    </form>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary w-100">Create Account</button>
+                </div>
+            }
+
+            <div class="col-12">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger mt-2">@ViewBag.Error</div>
+                }
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-success mt-2">@ViewBag.Message</div>
+                }
+            </div>
+        </form>
+    </div>
 </div>

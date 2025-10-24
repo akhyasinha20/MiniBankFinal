@@ -1,14 +1,16 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Transactions";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<div class="container mt-4">
-    <h3 class="mb-3">View Transactions</h3>
+<div class="card p-4 mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0 text-primary">View Transactions</h3>
+        <a class="btn btn-outline-accent btn-sm" href="@Url.Action("Dashboard","Manager")">Back</a>
+    </div>
 
     <div class="card p-3 mb-3">
-        <form method="post" class="row g-2" asp-action="ViewTransactions">
+        <form method="post" class="row g-2">
             @Html.AntiForgeryToken()
             <div class="col-md-4">
                 <label class="form-label">Customer ID</label>
@@ -25,98 +27,84 @@
             <div class="col-md-2 d-flex align-items-end">
                 <button type="submit" class="btn btn-primary w-100">Search</button>
             </div>
-            <div class="col-12 text-muted mt-2">Either enter Customer ID (shows that customer's transactions), or enter both dates (shows all transactions in range). You can combine both to filter a customer's transactions by date.</div>
+            <div class="col-12 text-muted mt-2">Provide a Customer ID, or a date range, or both to filter transactions.</div>
         </form>
     </div>
 
     @if (ViewBag.Error != null)
-    {
-        <div class="alert alert-danger">@ViewBag.Error</div>
-    }
+    {<div class="alert alert-danger">@ViewBag.Error</div>}
 
-    @if (ViewBag.Customer != null)
-    {
-        <div class="mb-2"><strong>Customer:</strong> @((ViewBag.Customer as MiniBank.Models.Customer)?.CustName) (ID: @((ViewBag.Customer as MiniBank.Models.Customer)?.CustomerId))</div>
-    }
+    <div class="mb-3">
+        <h5 class="mb-2">Savings Transactions</h5>
+        @if (ViewBag.SavingsTransactions == null || !((IEnumerable<object>)ViewBag.SavingsTransactions).Any())
+        {
+            <div class="alert alert-info">No savings transactions found for the selected criteria.</div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Account ID</th>
+                            <th>Type</th>
+                            <th>Amount (₹)</th>
+                            <th>Balance After (₹)</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var t in (IEnumerable<MiniBank.Models.SavingsTransaction>)ViewBag.SavingsTransactions)
+                        {
+                            <tr>
+                                <td>@t.TransactionId</td>
+                                <td>@t.AccountId</td>
+                                <td>@t.TransactionType</td>
+                                <td>@t.Amount.ToString("F2")</td>
+                                <td>@t.BalanceAfter.ToString("F2")</td>
+                                <td>@(t.TransactionDate.HasValue ? t.TransactionDate.Value.ToString("yyyy/MM/dd HH:mm") : "-")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
 
-    @{
-        var savings = ViewBag.SavingsTransactions as List<MiniBank.Models.SavingsTransaction>;
-        var loans = ViewBag.LoanTransactions as List<MiniBank.Models.LoanTransaction>;
-    }
-
-    <h5>Savings Transactions</h5>
-    @if (savings == null)
-    {
-        <div class="text-muted">No savings transactions loaded.</div>
-    }
-    else if (!savings.Any())
-    {
-        <div class="alert alert-info">No savings transactions found for the selected criteria.</div>
-    }
-    else
-    {
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Transaction ID</th>
-                    <th>Account ID</th>
-                    <th>Type</th>
-                    <th>Amount (₹)</th>
-                    <th>Balance After (₹)</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var t in savings)
-                {
-                    <tr>
-                        <td>@t.TransactionId</td>
-                        <td>@t.AccountId</td>
-                        <td>@t.TransactionType</td>
-                        <td>@t.Amount.ToString("F2")</td>
-                        <td>@t.BalanceAfter.ToString("F2")</td>
-                        <td>@(t.TransactionDate.HasValue ? t.TransactionDate.Value.ToString("yyyy/MM/dd HH:mm") : "-")</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-
-    <h5 class="mt-4">Loan Transactions</h5>
-    @if (loans == null)
-    {
-        <div class="text-muted">No loan transactions loaded.</div>
-    }
-    else if (!loans.Any())
-    {
-        <div class="alert alert-info">No loan transactions found for the selected criteria.</div>
-    }
-    else
-    {
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Transaction ID</th>
-                    <th>Loan Account ID</th>
-                    <th>Amount (₹)</th>
-                    <th>Outstanding After (₹)</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var t in loans)
-                {
-                    <tr>
-                        <td>@t.TransactionId</td>
-                        <td>@t.LoanAccountId</td>
-                        <td>@t.Amount.ToString("F2")</td>
-                        <td>@t.OutstandingAfter.ToString("F2")</td>
-                        <td>@(t.TransDate.HasValue ? t.TransDate.Value.ToString("yyyy/MM/dd HH:mm") : "-")</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-
-    <a class="btn btn-secondary mt-3" href="@Url.Action("Dashboard","Manager")">Back to Dashboard</a>
+    <div class="mb-3">
+        <h5 class="mb-2">Loan Transactions</h5>
+        @if (ViewBag.LoanTransactions == null || !((IEnumerable<object>)ViewBag.LoanTransactions).Any())
+        {
+            <div class="alert alert-info">No loan transactions found for the selected criteria.</div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Loan Account ID</th>
+                            <th>Amount (₹)</th>
+                            <th>Outstanding After (₹)</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var t in (IEnumerable<MiniBank.Models.LoanTransaction>)ViewBag.LoanTransactions)
+                        {
+                            <tr>
+                                <td>@t.TransactionId</td>
+                                <td>@t.LoanAccountId</td>
+                                <td>@t.Amount.ToString("F2")</td>
+                                <td>@t.OutstandingAfter.ToString("F2")</td>
+                                <td>@(t.TransDate.HasValue ? t.TransDate.Value.ToString("yyyy/MM/dd HH:mm") : "-")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
 </div>

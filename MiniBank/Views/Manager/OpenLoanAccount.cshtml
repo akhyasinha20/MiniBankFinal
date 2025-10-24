@@ -1,59 +1,77 @@
-﻿razor MiniBank\Views\Manager\OpenLoanAccount.cshtml
-@{
+﻿@{
     ViewBag.Title = "OpenLoanAccount";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<div class="container mt-4" style="max-width:600px">
-    <h3>Open Loan Account</h3>
-
-    <form method="post" class="mt-3">
-        @Html.AntiForgeryToken()
-        <div class="mb-3">
-            <label class="form-label">Customer</label>
-            @if (ViewBag.Customers != null)
-            {
-                <select name="customerId" class="form-select" required>
-                    <option value="">-- Select customer --</option>
-                    @foreach (var c in (IEnumerable<dynamic>)ViewBag.Customers)
-                    {
-                        <option value="@c.CustomerId">@c.CustName (@c.CustomerId)</option>
-                    }
-                </select>
-            }
-            else
-            {
-                <input type="number" name="customerId" class="form-control" placeholder="CustomerId" required />
-            }
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Loan Amount</label>
-            <input type="number" step="0.01" name="loanAmount" class="form-control" required />
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Tenure (months)</label>
-            <input type="number" name="tenureMonths" class="form-control" required />
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Annual ROI (%)</label>
-            <input type="number" step="0.01" name="annualROI" class="form-control" required />
-        </div>
-
-        <button class="btn btn-primary" type="submit">Create Loan Account</button>
-
-        @* Display calculated EMI when available *@
-        @if (ViewBag.EMI != null)
-        {
-            <div class="mt-3 alert alert-success">
-                <strong>EMI calculated:</strong> ₹@((decimal)ViewBag.EMI).ToString("F2"))
-              
+<div class="card single-card-centered mt-4">
+    <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <h3 class="mb-1 text-primary">Open Loan Account (Manager)</h3>
+                <div class="text-muted small">Create loan accounts for customers</div>
             </div>
-        }
+            <div>
+                <a class="btn btn-outline-accent btn-sm" href="@Url.Action("Dashboard","Manager")">Back</a>
+            </div>
+        </div>
 
-        <div class="mt-3 text-success">@ViewBag.Message</div>
-        <div class="mt-3 text-danger">@ViewBag.Error</div>
-    </form>
+        <form method="post" class="row g-3">
+            @Html.AntiForgeryToken()
+            <div class="col-12">
+                <label class="form-label">Customer</label>
+                @if (ViewBag.Customers != null)
+                {
+                    <select name="customerId" class="form-select" required>
+                        <option value="">-- Select customer --</option>
+                        @foreach (var c in (IEnumerable<dynamic>)ViewBag.Customers)
+                        {
+                            <option value="@c.CustomerId">@c.CustName (@c.CustomerId)</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <input type="number" name="customerId" class="form-control" placeholder="CustomerId" required />
+                }
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Loan Amount (₹)</label>
+                <input type="number" step="0.01" name="loanAmount" class="form-control" required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Tenure (months)</label>
+                <input type="number" name="tenureMonths" class="form-control" required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Monthly Salary (₹)</label>
+                <input type="number" step="0.01" name="monthlyTakeHome" class="form-control" required />
+                <div class="form-text text-muted">EMI calculation preview will be shown if available.</div>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary w-100">Create Loan Account</button>
+            </div>
+
+            <div class="col-12">
+                @if (ViewBag.EMI != null)
+                {
+                    <div class="alert alert-success mt-2">
+                        <strong>EMI calculated:</strong> ₹@((decimal)ViewBag.EMI).ToString("F2")
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(ViewBag.Message))
+                {
+                    <div class="alert alert-success mt-2">@ViewBag.Message</div>
+                }
+                @if (!string.IsNullOrEmpty(ViewBag.Error))
+                {
+                    <div class="alert alert-danger mt-2">@ViewBag.Error</div>
+                }
+            </div>
+        </form>
+    </div>
 </div>

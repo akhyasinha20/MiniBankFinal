@@ -3,31 +3,52 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<div class="card shadow-sm p-4 mt-4">
-    <h3 class="text-info mb-3">Open Loan Account</h3>
-
-    <form method="post">
-        <div class="mb-3">
-            <label>Customer ID</label>
-            <input type="number" name="customerId" class="form-control" required />
-        </div>
-        <div class="mb-3">
-            <label>Loan Amount (₹)</label>
-            <input type="number" name="loanAmount" step="0.01" class="form-control" required />
-        </div>
-        <div class="mb-3">
-            <label>Tenure (months)</label>
-            <input type="number" name="tenure" class="form-control" required />
-        </div>
-        <div class="mb-3">
-            <label>Salary (₹)</label>
-            <input type="number" name="monthlyTakeHome" step="0.01" class="form-control" required />
-            <small class="form-text text-muted">EMI must not exceed 60% of this value.</small>
+<div class="card single-card-centered mt-4">
+    <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+            <div>
+                <h3 class="mb-1 text-primary">Open Loan Account</h3>
+                <div class="text-muted small">Enter customer details and loan terms. EMI is validated against take-home pay.</div>
+            </div>
+           
         </div>
 
-        <button type="submit" class="btn btn-info w-100">Create Loan Account</button>
+        <form method="post" class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Customer ID</label>
+                <input type="number" name="customerId" class="form-control" required />
+            </div>
 
-        <div class="text-danger mt-3">@ViewBag.Error</div>
-        <div class="text-success mt-3">@ViewBag.Message</div>
-    </form>
+            <div class="col-md-6">
+                <label class="form-label">Loan Amount (₹)</label>
+                <input type="number" name="loanAmount" step="0.01" class="form-control" required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Tenure (months)</label>
+                <input type="number" name="tenure" class="form-control" required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Monthly Salary (₹)</label>
+                <input type="number" name="monthlyTakeHome" step="0.01" class="form-control" required />
+                <div class="form-text text-muted">EMI cannot exceed 60% of this amount.</div>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary w-100">Create Loan Account</button>
+            </div>
+
+            <div class="col-12">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger mt-2">@ViewBag.Error</div>
+                }
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-success mt-2">@ViewBag.Message</div>
+                }
+            </div>
+        </form>
+    </div>
 </div>

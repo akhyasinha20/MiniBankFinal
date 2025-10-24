@@ -1,83 +1,88 @@
 ﻿@{
-    ViewBag.Title = "ViewTransactions";
+    ViewBag.Title = "Transactions";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+
+    var savings = ViewBag.SavingsTransactions as IEnumerable<MiniBank.Models.SavingsTransaction> ?? Enumerable.Empty<MiniBank.Models.SavingsTransaction>();
+    var loans = ViewBag.LoanTransactions as IEnumerable<MiniBank.Models.LoanTransaction> ?? Enumerable.Empty<MiniBank.Models.LoanTransaction>();
 }
 
-<h3 class="text-primary mb-4">Transaction History</h3>
+<div class="card p-4 mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0 text-primary">Transaction History</h3>
+        <a class="btn btn-outline-accent btn-sm" href="@Url.Action("Dashboard","Customer")">Back</a>
+    </div>
 
-<div class="card mb-4 p-3">
-    <form method="get" class="row g-2 align-items-end">
-        <div class="col-auto">
-            <label class="form-label">Type</label>
-            <select name="type" class="form-select">
-                <option value="Savings" @(ViewBag.SelectedType == "Savings" ? "selected" : "")>Savings</option>
-                <option value="Loan" @(ViewBag.SelectedType == "Loan" ? "selected" : "")>Loan</option>
-            </select>
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary">Show</button>
-        </div>
-    </form>
+    <div class="mb-3">
+        <h5 class="mb-2">Savings Transactions</h5>
+        @if (!savings.Any())
+        {
+            <div class="alert alert-info">No savings transactions found.</div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Account</th>
+                            <th>Type</th>
+                            <th>Amount (₹)</th>
+                            <th>Balance After (₹)</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var t in savings)
+                        {
+                            <tr>
+                                <td>@t.TransactionId</td>
+                                <td>@t.AccountId</td>
+                                <td>@t.TransactionType</td>
+                                <td>@t.Amount.ToString("N2")</td>
+                                <td>@t.BalanceAfter.ToString("N2")</td>
+                                <td>@(t.TransactionDate.HasValue ? t.TransactionDate.Value.ToString("yyyy/MM/dd HH:mm") : "-")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+
+    <div class="mb-3 mt-4">
+        <h5 class="mb-2">Loan Transactions</h5>
+        @if (!loans.Any())
+        {
+            <div class="alert alert-info">No loan transactions found.</div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Loan Account</th>
+                            <th>Amount (₹)</th>
+                            <th>Outstanding After (₹)</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var t in loans)
+                        {
+                            <tr>
+                                <td>@t.TransactionId</td>
+                                <td>@t.LoanAccountId</td>
+                                <td>@t.Amount.ToString("N2")</td>
+                                <td>@t.OutstandingAfter.ToString("N2")</td>
+                                <td>@(t.TransDate.HasValue ? t.TransDate.Value.ToString("yyyy/MM/dd HH:mm") : "-")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
 </div>
-
-@if (ViewBag.Transactions == null || !((IEnumerable<object>)ViewBag.Transactions).Any())
-{
-    <div class="alert alert-info">No transactions found for the selected type.</div>
-}
-else
-{
-    if (ViewBag.SelectedType == "Loan")
-    {
-        <table class="table table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Loan Account ID</th>
-                    <th>Amount (₹)</th>
-                    <th>Outstanding After (₹)</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var tx in ViewBag.Transactions)
-                {
-                    <tr>
-                        <td>@tx.TransactionId</td>
-                        <td>@tx.LoanAccountId</td>
-                        <td>@String.Format("{0:N2}", tx.Amount)</td>
-                        <td>@String.Format("{0:N2}", tx.OutstandingAfter)</td>
-                        <td>@(tx.TransDate != null ? ((DateTime)tx.TransDate).ToString("dd-MM-yyyy hh:mm tt") : "")</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <table class="table table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Account ID</th>
-                    <th>Type</th>
-                    <th>Amount (₹)</th>
-                    <th>Balance After (₹)</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var tx in ViewBag.Transactions)
-                {
-                    <tr>
-                        <td>@tx.TransactionId</td>
-                        <td>@tx.AccountId</td>
-                        <td>@tx.TransactionType</td>
-                        <td>@String.Format("{0:N2}", tx.Amount)</td>
-                        <td>@String.Format("{0:N2}", tx.BalanceAfter)</td>
-                        <td>@(tx.TransactionDate != null ? ((DateTime)tx.TransactionDate).ToString("dd-MM-yyyy hh:mm tt") : "")</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-}

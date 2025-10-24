@@ -1,115 +1,124 @@
-﻿
-@using MiniBank.Models
+﻿@using MiniBank.Models
 @{
     ViewBag.Title = "Report";
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
-<div class="card shadow-sm p-4 mt-4">
-    <h3 class="text-secondary mb-3">Generate Report</h3>
+<div class="card single-card-centered mt-4">
+    <div class="card-body p-4">
+        <h3 class="text-primary mb-2">Generate Transaction Report</h3>
+        <div class="text-muted small mb-3">Select transaction type and date range.</div>
 
-    <form method="post" novalidate>
-        <div class="mb-3">
-            <label>Type</label>
-            <select name="type" class="form-select" required>
-                <option value="Savings" @(ViewBag.SelectedType == "Savings" ? "selected" : "")>Savings</option>
-                <option value="Loan" @(ViewBag.SelectedType == "Loan" ? "selected" : "")>Loan</option>
-            </select>
-        </div>
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label>From Date</label>
+        <form method="post" class="row g-3">
+            <div class="col-md-12">
+                <label class="form-label">Type</label>
+                <select name="type" class="form-select" required>
+                    <option value="Savings" @(ViewBag.SelectedType == "Savings" ? "selected" : "")>Savings</option>
+                    <option value="Loan" @(ViewBag.SelectedType == "Loan" ? "selected" : "")>Loan</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">From Date</label>
                 <input type="date" name="fromDate" class="form-control" value="@(ViewBag.FromDate ?? "")" required />
             </div>
-            <div class="col-md-6 mb-3">
-                <label>To Date</label>
+
+            <div class="col-md-6">
+                <label class="form-label">To Date</label>
                 <input type="date" name="toDate" class="form-control" value="@(ViewBag.ToDate ?? "")" required />
             </div>
-        </div>
 
-        <button class="btn btn-secondary w-100">Generate</button>
+            <div class="col-12">
+                <button class="btn btn-primary w-100">Generate</button>
+            </div>
 
-        @if (ViewBag.Error != null)
-        {
-            <div class="alert alert-danger mt-3">@ViewBag.Error</div>
-        }
-    </form>
+            <div class="col-12">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger mt-2">@ViewBag.Error</div>
+                }
+            </div>
+        </form>
+    </div>
 </div>
 
 @if (ViewBag.Transactions != null)
 {
     var transactions = ViewBag.Transactions as System.Collections.IEnumerable;
-    <div class="card shadow-sm p-4 mt-4">
-        <h4 class="text-secondary mb-3">Transaction Report</h4>
-        <div class="mb-2 text-muted">From: @(ViewBag.FromDate ?? "") &nbsp; To: @(ViewBag.ToDate ?? "")</div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Transaction ID</th>
-                    <th>Account ID</th>
-                    <th>Type</th>
-                    <th>Amount (₹)</th>
-                    <th>Balance/Outstanding After</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (transactions != null)
-                {
-                    foreach (var item in transactions)
-                    {
-                     
-                        if (item is SavingsTransaction st)
+    <div class="card single-card-centered mt-4">
+        <div class="card-body p-4">
+            <h4 class="mb-3 text-primary">Transaction Report</h4>
+            <div class="mb-2 text-muted small">From: @(ViewBag.FromDate ?? "") — To: @(ViewBag.ToDate ?? "")</div>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Account ID</th>
+                            <th>Type</th>
+                            <th>Amount (₹)</th>
+                            <th>Balance/Outstanding After (₹)</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (transactions != null)
                         {
-                            <tr>
-                                <td>@st.TransactionId</td>
-                                <td>@st.AccountId</td>
-                                <td>@st.TransactionType</td>
-                                <td>@st.Amount.ToString("F2")</td>
-                                <td>@st.BalanceAfter.ToString("F2")</td>
-                                <td>@(st.TransactionDate.HasValue ? st.TransactionDate.Value.ToString("yyyy/MM/dd HH:mm") : "-")</td>
-                            </tr>
-                        }
-                        else if (item is LoanTransaction lt)
-                        {
-                            <tr>
-                                <td>@lt.TransactionId</td>
-                                <td>@lt.LoanAccountId</td>
-                                <td>EMI Payment</td>
-                                <td>@lt.Amount.ToString("F2")</td>
-                                <td>@lt.OutstandingAfter.ToString("F2")</td>
-                                <td>@(lt.TransDate.HasValue ? lt.TransDate.Value.ToString("yyyy/MM/dd HH:mm") : "-")</td>
-                            </tr>
-                        }
-                        else
-                        {
-                            
-                            var type = item?.GetType();
-                            var getProp = new Func<string, object>(name =>
+                            foreach (var item in transactions)
                             {
-                                var p = type?.GetProperty(name);
-                                return p != null ? p.GetValue(item) : null;
-                            });
+                                if (item is SavingsTransaction st)
+                                {
+                                    <tr>
+                                        <td>@st.TransactionId</td>
+                                        <td>@st.AccountId</td>
+                                        <td>@st.TransactionType</td>
+                                        <td>@st.Amount.ToString("F2")</td>
+                                        <td>@st.BalanceAfter.ToString("F2")</td>
+                                        <td>@(st.TransactionDate.HasValue ? st.TransactionDate.Value.ToString("yyyy/MM/dd HH:mm") : "-")</td>
+                                    </tr>
+                                }
+                                else if (item is LoanTransaction lt)
+                                {
+                                    <tr>
+                                        <td>@lt.TransactionId</td>
+                                        <td>@lt.LoanAccountId</td>
+                                        <td>EMI Payment</td>
+                                        <td>@lt.Amount.ToString("F2")</td>
+                                        <td>@lt.OutstandingAfter.ToString("F2")</td>
+                                        <td>@(lt.TransDate.HasValue ? lt.TransDate.Value.ToString("yyyy/MM/dd HH:mm") : "-")</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    var type = item?.GetType();
+                                    var getProp = new Func<string, object>(name =>
+                                    {
+                                        var p = type?.GetProperty(name);
+                                        return p != null ? p.GetValue(item) : null;
+                                    });
 
-                            var tid = getProp("TransactionId") ?? getProp("transactionId");
-                            var accId = getProp("AccountId") ?? getProp("LoanAccountId") ?? getProp("accountId");
-                            var txType = getProp("TransactionType") ?? "N/A";
-                            var amount = getProp("Amount");
-                            var balanceAfter = getProp("BalanceAfter") ?? getProp("OutstandingAfter");
-                            var txDate = getProp("TransactionDate") ?? getProp("TransDate");
+                                    var tid = getProp("TransactionId") ?? getProp("transactionId");
+                                    var accId = getProp("AccountId") ?? getProp("LoanAccountId") ?? getProp("accountId");
+                                    var txType = getProp("TransactionType") ?? "N/A";
+                                    var amount = getProp("Amount");
+                                    var balanceAfter = getProp("BalanceAfter") ?? getProp("OutstandingAfter");
+                                    var txDate = getProp("TransactionDate") ?? getProp("TransDate");
 
-                            <tr>
-                                <td>@(tid ?? "-")</td>
-                                <td>@(accId ?? "-")</td>
-                                <td>@(txType ?? "-")</td>
-                                <td>@(amount != null ? string.Format("{0:F2}", amount) : "-")</td>
-                                <td>@(balanceAfter != null ? string.Format("{0:F2}", balanceAfter) : "-")</td>
-                                <td>@(txDate != null ? string.Format("{0:yyyy/MM/dd HH:mm}", txDate) : "-")</td>
-                            </tr>
+                                    <tr>
+                                        <td>@(tid ?? "-")</td>
+                                        <td>@(accId ?? "-")</td>
+                                        <td>@(txType ?? "-")</td>
+                                        <td>@(amount != null ? string.Format("{0:F2}", amount) : "-")</td>
+                                        <td>@(balanceAfter != null ? string.Format("{0:F2}", balanceAfter) : "-")</td>
+                                        <td>@(txDate != null ? string.Format("{0:yyyy/MM/dd HH:mm}", txDate) : "-")</td>
+                                    </tr>
+                                }
+                            }
                         }
-                    }
-                }
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 }

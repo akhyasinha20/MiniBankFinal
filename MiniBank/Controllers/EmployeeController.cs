@@ -25,7 +25,7 @@ namespace MiniBank.Controllers
         [HttpPost]
         public ActionResult OpenAccount(string pan, string name, DateTime? dob, decimal? minBalance, string email)
         {
-            // Step 1: Check if PAN exists
+            //Check if PAN exists
             if (string.IsNullOrEmpty(name) || !dob.HasValue || !minBalance.HasValue)
             {
                 var existing = db.Customers.FirstOrDefault(c => c.PAN == pan);
@@ -107,17 +107,17 @@ namespace MiniBank.Controllers
             db.SavingsAccounts.Add(savings);
             db.SaveChanges();
 
-            // Generate login credentials for the customer
+          
             var username = cust.CustName;
             var password = "Password1234"; // meets at least one upper, lower, digit
 
-            // ensure username uniqueness
+           
            
 
             var user = new UserRegister
             {
                 Username = username,
-                PasswordHash = password, // existing system stores plaintext; keep consistent
+                PasswordHash = password, 
                 Email = email,
                 Role = "Customer",
                 ReferenceId = cust.CustomerId,
@@ -132,14 +132,7 @@ namespace MiniBank.Controllers
             return View();
         }
 
-        // Helper: create a username from PAN (fallback to cust id appended if needed)
-        private string GenerateUsernameFromPAN(string pan, int customerId)
-        {
-            if (string.IsNullOrWhiteSpace(pan)) return "cust" + customerId;
-            // remove spaces and make uppercase
-            var clean = new string(pan.Where(char.IsLetterOrDigit).ToArray());
-            return clean;
-        }
+        
 
         private int GetIntFromByte(byte b) => b;
 
