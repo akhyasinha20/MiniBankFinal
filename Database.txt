@@ -1,8 +1,8 @@
 use master;
-drop database MiniBankDB
-CREATE DATABASE MiniBankDB;
+drop database MiniBankDB;
+CREATE DATABASE MiniBankDBNew;
 
-USE MiniBankDB;
+USE MiniBankDBNew;
 
 
 CREATE TABLE Department (
@@ -37,7 +37,7 @@ select * from Customer
 select * from SavingsAccount
 CREATE TABLE Account (
     AccountId INT IDENTITY(10000,1) PRIMARY KEY,
-    AccountType NVARCHAR(20) CHECK (AccountType IN ('Savings','Loan')),
+    AccountType NVARCHAR(20) CHECK (AccountType IN ('Savings','Loan','FixedDeposit')),
     CustomerId INT NOT NULL,
     CreatedAt DATETIME DEFAULT GETDATE(),
     CONSTRAINT FK_Account_Customer FOREIGN KEY (CustomerId) REFERENCES Customer(CustomerId)
@@ -63,12 +63,22 @@ CREATE TABLE SavingsTransaction (
     BalanceAfter DECIMAL(18,2) NOT NULL,
     CONSTRAINT FK_SavingsTransaction_SavingsAccount FOREIGN KEY (AccountId) REFERENCES SavingsAccount(AccountId)
 );
+CREATE TABLE FixedDepositAccount (
 
+   AccountId INT PRIMARY KEY,
+    CustomerId INT NOT NULL FOREIGN KEY REFERENCES Customer(CustomerId),
+    StartDate DATE NOT NULL DEFAULT GETDATE(),
+    EndDate DATE NOT NULL,
+    FD_ROI DECIMAL(5,2) NOT NULL CHECK (FD_ROI > 0),
+    PrincipalAmount DECIMAL(18,2) NOT NULL CHECK (PrincipalAmount >= 1000)
+	 CONSTRAINT FK_FixedDepositAccount_Account FOREIGN KEY (AccountId) REFERENCES Account(AccountId)
+);
 CREATE TABLE LoanAccount (
     AccountId INT PRIMARY KEY,
     LoanAmount DECIMAL(18,2) NOT NULL,
     StartDate DATE NOT NULL,
     TenureMonths INT NOT NULL,
+	Salary DECIMAL(18,2) NOT NULL,
     AnnualROI DECIMAL(5,2) NOT NULL,
     EMI DECIMAL(18,2),
     OutstandingAmount DECIMAL(18,2),
@@ -101,4 +111,4 @@ select * from Customer
 SELECT * FROM Account
 select * from SavingsAccount
 select * from LoanAccount
-
+select * from LoanTransaction
