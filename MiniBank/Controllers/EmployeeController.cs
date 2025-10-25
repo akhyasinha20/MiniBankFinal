@@ -10,15 +10,18 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using static System.Web.Razor.Parser.SyntaxConstants;
+using MiniBank.Filters;
 
 namespace MiniBank.Controllers
 {
     public class EmployeeController : Controller
-    {
+    {  
         // GET: Employee
-        private MiniBankDBEntities4 db = new MiniBankDBEntities4();
+        private MiniBankDBNewEntities db = new MiniBankDBNewEntities();
+        [SessionAuthorize]
         public ActionResult Dashboard() => View();
 
+        [SessionAuthorize]
         [HttpGet]
         public ActionResult OpenAccount() => View();
 
@@ -40,10 +43,10 @@ namespace MiniBank.Controllers
                 return View();
             }
 
-            var nameRegex = new Regex(@"^[A-Za-z]+$"); // only alphabets, no spaces
+            var nameRegex = new Regex(@"^[A-Z][a-zA-Z]*(?:[ '-][A-Z][a-zA-Z]*)*$"); // only alphabets
             if (string.IsNullOrWhiteSpace(name) || !nameRegex.IsMatch(name.Trim()))
             {
-                ViewBag.Error = "Customer name must contain only alphabets (A-Z, a-z) with no spaces.";
+                ViewBag.Error = "Customer name must contain only alphabets ";
                 ViewBag.PAN = pan;
                 ViewBag.Step = 2;
                 ViewBag.Name = name;
@@ -136,6 +139,7 @@ namespace MiniBank.Controllers
 
         private int GetIntFromByte(byte b) => b;
 
+        [SessionAuthorize]
         [HttpGet]
         public ActionResult DepositWithdraw() => View();
 
@@ -183,12 +187,125 @@ namespace MiniBank.Controllers
             return View();
         }
 
+       
+
+        [SessionAuthorize]
+        [HttpGet]
+        public ActionResult OpenFixedDeposit() => View();
+
+      
+       [HttpPost]
+       [ValidateAntiForgeryToken]
+       public ActionResult OpenFixedDeposit(int customerId, decimal principalAmount, int tenureYears, DateTime? startDate, bool? isSenior)
+        {
+            // Validate customer
+            var cust = db.Customers.Find(customerId);
+            if (cust == null)
+            {
+                ViewBag.Error = "Customer not found.";
+                return View();
+            }
+
+            // Validate principal and tenure
+            if (principalAmount < 10000m)
+            {
+                ViewBag.Error = "Minimum deposit for Fixed Deposit is ₹10,000.";
+                return View();
+            }
+
+            if (tenureYears <= 0)
+            {
+                ViewBag.Error = "Tenure (in years) must be greater than zero.";
+                return View();
+            }
+
+            // Start date: use provided or today; validate not future
+            var start = startDate.HasValue ? startDate.Value.Date : DateTime.Today;
+            if (start > DateTime.Today)
+            {
+                ViewBag.Error = "Start date cannot be in the future.";
+                return View();
+            }
+
+            // Determine senior status from DOB; 
+            var age = (cust.DOB.HasValue)
+                ? (DateTime.Today.Year - cust.DOB.Value.Year - (DateTime.Today.DayOfYear < cust.DOB.Value.DayOfYear ? 1 : 0))
+                : 0;
+            var isSeniorFromDob = age >= 60;
+            var finalIsSenior = isSeniorFromDob || (isSenior ?? false);
+
+            // ROI tiers:
+            // <=1 year => 6%
+            // >1 && <=2 years => 7%
+            // >2 years => 8%
+            decimal roi;
+            if (tenureYears <= 1) roi = 6.0m;
+            else if (tenureYears <= 2) roi = 7.0m;
+            else roi = 8.0m;
+
+            if (finalIsSenior) roi += 0.5m;
+
+            // Compound interest 
+            var r = (double)roi / 100.0;
+            var n = (double)tenureYears;
+            double maturityDouble;
+            try
+            {
+                maturityDouble = (double)principalAmount * Math.Pow(1.0 + r, n);
+            }
+            catch
+            {
+                ViewBag.Error = "Failed to compute maturity amount with given inputs.";
+                return View();
+            }
+
+            var maturityAmount = Math.Round((decimal)maturityDouble, 2);
+
+            // Create Account (Fixed Deposit)
+            var acc = new Account
+            {
+                AccountType = "FixedDeposit",
+                CustomerId = customerId,
+                CreatedAt = DateTime.Now
+            };
+            db.Accounts.Add(acc);
+            db.SaveChanges();
+
+          
+            var fd = new FixedDepositAccount
+            {
+                AccountId = acc.AccountId,
+                CustomerId = customerId,
+                StartDate = start,
+                EndDate = start.AddYears(tenureYears),
+                FD_ROI = roi,
+                PrincipalAmount = principalAmount
+            };
+            db.FixedDepositAccounts.Add(fd);
+            db.SaveChanges();
+
+            
+            var accountNumber = $"FD{acc.AccountId:D8}";
+            ViewBag.Message = $"Fixed Deposit opened. Account#: {accountNumber} (ID: {acc.AccountId}). ROI: {roi:F2}%. Maturity Amount: ₹{maturityAmount:F2} (on {fd.EndDate:yyyy-MM-dd}).";
+
+            ViewBag.FDAccountId = acc.AccountId;
+            ViewBag.AccountNumber = accountNumber;
+            ViewBag.Principal = principalAmount;
+            ViewBag.TenureYears = tenureYears;
+            ViewBag.ROI = roi;
+            ViewBag.MaturityAmount = maturityAmount;
+            ViewBag.MaturityDate = fd.EndDate.ToString("yyyy-MM-dd");
+
+            return View();
+        }
+
+        [SessionAuthorize]
         [HttpGet]
         public ActionResult LoanAccount() => View();
 
-        // Updated: include monthlyTakeHome and enforce validations described
-        [HttpPost]
-        public ActionResult LoanAccount(int customerId, decimal loanAmount, int tenure, decimal monthlyTakeHome)
+    
+       [HttpPost]
+       public ActionResult LoanAccount(int customerId, decimal loanAmount, int tenure, decimal monthlyTakeHome)
         {
             var cust = db.Customers.Find(customerId);
             if (cust == null)
@@ -197,26 +314,30 @@ namespace MiniBank.Controllers
                 return View();
             }
 
-            if (loanAmount < 10000)
+            // Minimum loan amount
+            if (loanAmount < 10000m)
             {
-                ViewBag.Error = "Minimum loan ₹10,000.";
+                ViewBag.Error = "Minimum Loan amount is ₹10,000.";
                 return View();
             }
 
+            // Senior check (age >= 60)
             var age = (cust.DOB.HasValue) ? (DateTime.Today.Year - cust.DOB.Value.Year - (DateTime.Today.DayOfYear < cust.DOB.Value.DayOfYear ? 1 : 0)) : 0;
             var isSenior = age >= 60;
 
-            if (isSenior && loanAmount > 100000)
+            // Senior citizens cannot be sanctioned loan > 100,000
+            if (isSenior && loanAmount > 100000m)
             {
-                ViewBag.Error = "Senior citizen max loan ₹1 Lakh.";
+                ViewBag.Error = "Senior citizens cannot be sanctioned a loan greater than ₹1,00,000.";
                 return View();
             }
 
+            // Determine ROI
             decimal roi;
-            if (isSenior) roi = 9.5M;
-            else if (loanAmount <= 500000M) roi = 10.0M;
-            else if (loanAmount <= 1000000M) roi = 9.5M;
-            else roi = 9.0M;
+            if (isSenior) roi = 9.5m;
+            else if (loanAmount <= 500000m) roi = 10.0m;       // up to 5 lakhs
+            else if (loanAmount <= 1000000m) roi = 9.5m;      // 5 - 10 lakhs
+            else roi = 9.0m;                                  // above 10 lakhs
 
             if (tenure <= 0)
             {
@@ -224,6 +345,7 @@ namespace MiniBank.Controllers
                 return View();
             }
 
+            // EMI calculation (standard formula, monthly compounding)
             var monthlyRate = (double)roi / 1200.0;
             double emiDouble;
             if (monthlyRate <= 0.0)
@@ -233,18 +355,20 @@ namespace MiniBank.Controllers
 
             var emi = Math.Round((decimal)emiDouble, 2);
 
+            // Enforce EMI <= 60% of monthly take-home
             var maxAllowedEmi = Math.Round(monthlyTakeHome * 0.60m, 2);
             if (emi > maxAllowedEmi)
             {
-                ViewBag.Error = $"EMI ₹{emi:F2} exceeds 60% of customer's monthly take-home (max allowed ₹{maxAllowedEmi:F2}).";
+                ViewBag.Error = $"Calculated EMI ₹{emi:F2} exceeds 60% of customer's monthly take-home (max allowed ₹{maxAllowedEmi:F2}).";
                 return View();
             }
 
-            var acc = new Account { AccountType = "Loan", CustomerId = customerId };
+            // Create account & loan
+            var acc = new Account { AccountType = "Loan", CustomerId = customerId, CreatedAt = DateTime.Now };
             db.Accounts.Add(acc);
             db.SaveChanges();
 
-            db.LoanAccounts.Add(new LoanAccount
+            var loan = new LoanAccount
             {
                 AccountId = acc.AccountId,
                 LoanAmount = loanAmount,
@@ -252,19 +376,28 @@ namespace MiniBank.Controllers
                 TenureMonths = tenure,
                 AnnualROI = roi,
                 EMI = emi,
-                OutstandingAmount = loanAmount
-            });
+                OutstandingAmount = loanAmount,
+                IsClosed = false
+            };
+
+            db.LoanAccounts.Add(loan);
             db.SaveChanges();
 
-            ViewBag.Message = $"Loan Account created. ID: {acc.AccountId}, EMI: ₹{emi:F2}";
+            var accountNumber = $"LN{acc.AccountId:D8}";
+            ViewBag.AccountNumber = accountNumber;
+            ViewBag.EMI = emi;
+            ViewBag.Message = $"Loan Account created. Account#: {accountNumber} (ID: {acc.AccountId}), EMI: ₹{emi:F2}, ROI: {roi:F2}%";
+
             return View();
         }
 
-        // Replace existing CloseAccount GET action with this version (keep other methods unchanged)
+        
+
+        [SessionAuthorize]
         [HttpGet]
-public ActionResult CloseAccount(int? customerId)
+        public ActionResult CloseAccount(int? customerId)
         {
-            // If customerId supplied, list all accounts linked to that customer
+            
             if (customerId.HasValue)
             {
                 var cust = db.Customers.Find(customerId.Value);
@@ -279,7 +412,6 @@ public ActionResult CloseAccount(int? customerId)
                 // All accounts for this customer
                 var accounts = db.Accounts.Where(a => a.CustomerId == customerId.Value).ToList();
 
-                // Preload related account details
                 var accountIds = accounts.Select(a => a.AccountId).ToList();
                 var savingsMap = db.SavingsAccounts.Where(s => accountIds.Contains(s.AccountId)).ToDictionary(s => s.AccountId);
                 var loanMap = db.LoanAccounts.Where(l => accountIds.Contains(l.AccountId)).ToDictionary(l => l.AccountId);
@@ -292,7 +424,7 @@ public ActionResult CloseAccount(int? customerId)
                 return View();
             }
 
-            // No customerId supplied -> render lookup form
+            
             ViewBag.Accounts = null;
             ViewBag.Customer = null;
             return View();
@@ -371,10 +503,10 @@ public ActionResult CloseAccount(int? customerId)
         }
 
         
-
-  [HttpPost]
-  [ValidateAntiForgeryToken]
-public ActionResult CloseCustomerConfirmed(int? customerId)
+ 
+         [HttpPost]
+         [ValidateAntiForgeryToken]
+        public ActionResult CloseCustomerConfirmed(int? customerId)
         {
             if (!customerId.HasValue)
             {
@@ -389,7 +521,7 @@ public ActionResult CloseCustomerConfirmed(int? customerId)
                 return RedirectToAction("CloseAccount");
             }
 
-            // If any accounts still exist, prevent deleting the customer
+           
             var hasAccounts = db.Accounts.Any(a => a.CustomerId == customerId.Value);
             if (hasAccounts)
             {
@@ -423,8 +555,10 @@ public ActionResult CloseCustomerConfirmed(int? customerId)
                 }
             }
         }
+
+        [SessionAuthorize]
         [HttpGet]
-public ActionResult Report()
+        public ActionResult Report()
         {
             ViewBag.Step = 1;
             return View();
@@ -505,5 +639,4 @@ public ActionResult Report()
             }
         }
     }
-
-        }
+}

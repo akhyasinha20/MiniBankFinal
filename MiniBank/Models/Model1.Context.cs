@@ -13,10 +13,10 @@ namespace MiniBank.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MiniBankDBEntities4 : DbContext
+    public partial class MiniBankDBNewEntities : DbContext
     {
-        public MiniBankDBEntities4()
-            : base("name=MiniBankDBEntities4")
+        public MiniBankDBNewEntities()
+            : base("name=MiniBankDBNewEntities")
         {
         }
     
@@ -29,6 +29,7 @@ namespace MiniBank.Models
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<FixedDepositAccount> FixedDepositAccounts { get; set; }
         public virtual DbSet<LoanAccount> LoanAccounts { get; set; }
         public virtual DbSet<LoanTransaction> LoanTransactions { get; set; }
         public virtual DbSet<SavingsAccount> SavingsAccounts { get; set; }

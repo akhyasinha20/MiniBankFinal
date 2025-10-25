@@ -6,25 +6,27 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using static System.Web.Razor.Parser.SyntaxConstants;
-
+using MiniBank.Filters;
 namespace MiniBank.Controllers
-{
+{using MiniBank.Filters;
     public class ManagerController : Controller
     {
-        private MiniBankDBEntities4 db = new MiniBankDBEntities4();
-
+        
+        private MiniBankDBNewEntities db = new MiniBankDBNewEntities();
+        [SessionAuthorize]
         // GET: Manager
         public ActionResult Dashboard()
         {
             ViewBag.TotalEmployees = db.UserRegisters.Count(u => u.Role == "Employee");
             ViewBag.TotalCustomers = db.Customers.Count();
             ViewBag.TotalLoanAccounts = db.LoanAccounts.Count();
+            ViewBag.TotalFixedAccounts = db.FixedDepositAccounts.Count();
+            
             return View();
         }
 
-        //
-        // Employee-management (existing)
-        //
+        
+        [SessionAuthorize]
         public ActionResult AddEmployee()
         {
             var emps = db.UserRegisters.Where(u => u.Role == "Employee").ToList();
@@ -58,7 +60,7 @@ namespace MiniBank.Controllers
                         };
 
                         db.Employees.Add(employee);
-                        db.SaveChanges(); // obtain EmpId
+                        db.SaveChanges(); 
 
                         usr.ReferenceId = employee.EmpId;
                     }
@@ -125,19 +127,15 @@ namespace MiniBank.Controllers
             return RedirectToAction("AddEmployee");
         }
 
-        //
-        // Account management (same features as Employee)
-        //
-
+       
+        [SessionAuthorize]
         [HttpGet]
         public ActionResult OpenAccount() => View();
 
-        // Two-step pattern kept from EmployeeController: first call passes PAN only,
-        // second call supplies name/dob/minBalance/email to create customer+account.
         [HttpPost]
         public ActionResult OpenAccount(string pan, string name, DateTime? dob, decimal? minBalance, string email)
         {
-            // Step 1: if insufficient data, check PAN existence and prompt for step 2
+           
             if (string.IsNullOrEmpty(name) || !dob.HasValue || !minBalance.HasValue)
             {
                 var existing = db.Customers.FirstOrDefault(c => c.PAN == pan);
@@ -152,11 +150,11 @@ namespace MiniBank.Controllers
                 return View();
             }
 
-            // Basic server-side validations (similar to EmployeeController)
-            var nameRegex = new System.Text.RegularExpressions.Regex(@"^[A-Za-z]+$");
+            // Basic server-side validations 
+            var nameRegex = new System.Text.RegularExpressions.Regex(@"^[A-Z][a-zA-Z]*(?:[ '-][A-Z][a-zA-Z]*)*$");
             if (string.IsNullOrWhiteSpace(name) || !nameRegex.IsMatch(name.Trim()))
             {
-                ViewBag.Error = "Customer name must contain only alphabets (A-Z, a-z) with no spaces.";
+                ViewBag.Error = "Customer name must contain only alphabets ";
                 ViewBag.PAN = pan;
                 ViewBag.Step = 2;
                 ViewBag.Name = name;
@@ -190,7 +188,7 @@ namespace MiniBank.Controllers
                 return View();
             }
 
-            // Create Customer, Account, SavingsAccount and a UserRegister (same as EmployeeController)
+            
             var cust = new Customer
             {
                 CustName = name.Trim(),
@@ -242,16 +240,119 @@ namespace MiniBank.Controllers
             return View();
         }
 
-        //
-        // Open Loan Account
 
+        [SessionAuthorize]
+        [HttpGet]
+        public ActionResult OpenFixedDeposit() => View();
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult OpenFixedDeposit(int customerId, decimal principalAmount, int tenureYears)
+        {
+            // Validate customer
+            var cust = db.Customers.Find(customerId);
+            if (cust == null)
+            {
+                ViewBag.Error = "Customer not found.";
+                return View();
+            }
+
+            // Validate principal and tenure
+            if (principalAmount < 10000m)
+            {
+                ViewBag.Error = "Minimum deposit for Fixed Deposit is ₹10,000.";
+                return View();
+            }
+
+            if (tenureYears <= 0)
+            {
+                ViewBag.Error = "Tenure (in years) must be greater than zero.";
+                return View();
+            }
+
+            // Determine customer's age and senior status
+            var age = (cust.DOB.HasValue)
+                ? (DateTime.Today.Year - cust.DOB.Value.Year - (DateTime.Today.DayOfYear < cust.DOB.Value.DayOfYear ? 1 : 0))
+                : 0;
+            var isSenior = age >= 60;
+
+            // ROI tiers:
+            // <=1 year => 6%
+            // >1 && <=2 years => 7%
+            // >2 years => 8%
+            decimal roi;
+            if (tenureYears <= 1) roi = 6.0m;
+            else if (tenureYears <= 2) roi = 7.0m;
+            else roi = 8.0m;
+
+            if (isSenior) roi += 0.5m;
+
+            // Compound interest (annual compounding): A = P * (1 + r)^n
+            var r = (double)roi / 100.0;
+            var n = (double)tenureYears;
+            double maturityDouble;
+            try
+            {
+                maturityDouble = (double)principalAmount * Math.Pow(1.0 + r, n);
+            }
+            catch
+            {
+                ViewBag.Error = "Failed to compute maturity amount with given inputs.";
+                return View();
+            }
+
+            var maturityAmount = Math.Round((decimal)maturityDouble, 2);
+
+            
+            var acc = new Account
+            {
+                AccountType = "FixedDeposit",
+                CustomerId = customerId,
+                CreatedAt = DateTime.Now
+            };
+            db.Accounts.Add(acc);
+            db.SaveChanges();
+
+           
+            var fd = new FixedDepositAccount
+            {
+                AccountId = acc.AccountId,
+                CustomerId = customerId,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddYears(tenureYears),
+                FD_ROI = roi,
+                PrincipalAmount = principalAmount
+            };
+            db.FixedDepositAccounts.Add(fd);
+            db.SaveChanges();
+
+         
+            var accountNumber = $"FD{acc.AccountId:D8}";
+            ViewBag.Message = $"Fixed Deposit opened. Account#: {accountNumber} (ID: {acc.AccountId}). ROI: {roi:F2}%. Maturity Amount: ₹{maturityAmount:F2} (on {fd.EndDate:yyyy-MM-dd}).";
+
+            ViewBag.FDAccountId = acc.AccountId;
+            ViewBag.AccountNumber = accountNumber;
+            ViewBag.Principal = principalAmount;
+            ViewBag.TenureYears = tenureYears;
+            ViewBag.ROI = roi;
+            ViewBag.MaturityAmount = maturityAmount;
+            ViewBag.MaturityDate = fd.EndDate.ToString("yyyy-MM-dd");
+
+            return View();
+        }
+
+        
+        // Open Loan Account
+        [SessionAuthorize]
         [HttpGet]
         public ActionResult OpenLoanAccount()
         {
-            // populate dropdown in view
+           
             ViewBag.Customers = db.Customers.ToList();
             return View();
         }
+    
+         
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -266,15 +367,16 @@ namespace MiniBank.Controllers
                 return View();
             }
 
+            // Minimum loan amount
             if (loanAmount < 10000m)
             {
-                ViewBag.Error = "Minimum loan amount is ₹10,000.";
+                ViewBag.Error = "Minimum Loan amount is ₹10,000.";
                 return View();
             }
 
             // Senior check (age >= 60)
-            var isSenior = customer.DOB.HasValue &&
-                           (DateTime.Today.Year - customer.DOB.Value.Year - (DateTime.Today.DayOfYear < customer.DOB.Value.DayOfYear ? 1 : 0)) >= 60;
+            var age = (customer.DOB.HasValue) ? (DateTime.Today.Year - customer.DOB.Value.Year - (DateTime.Today.DayOfYear < customer.DOB.Value.DayOfYear ? 1 : 0)) : 0;
+            var isSenior = age >= 60;
 
             if (isSenior && loanAmount > 100000m)
             {
@@ -302,9 +404,16 @@ namespace MiniBank.Controllers
                 emiDouble = (double)loanAmount / tenureMonths;
             else
                 emiDouble = (double)loanAmount * monthlyRate / (1.0 - Math.Pow(1.0 + monthlyRate, -tenureMonths));
+
             var emi = Math.Round((decimal)emiDouble, 2);
 
-            // NOTE: EMI vs salary constraint removed (monthlyTakeHome is accepted but not enforced)
+            // Enforce EMI <= 60% of monthly take-home
+            var maxAllowedEmi = Math.Round(monthlyTakeHome * 0.60m, 2);
+            if (emi > maxAllowedEmi)
+            {
+                ViewBag.Error = $"Calculated EMI ₹{emi:F2} exceeds 60% of customer's monthly take-home (max allowed ₹{maxAllowedEmi:F2}).";
+                return View();
+            }
 
             // Create account & loan
             var acc = new Account { AccountType = "Loan", CustomerId = customer.CustomerId, CreatedAt = DateTime.Now };
@@ -326,13 +435,17 @@ namespace MiniBank.Controllers
             db.LoanAccounts.Add(loan);
             db.SaveChanges();
 
+            var accountNumber = $"LN{acc.AccountId:D8}";
+            ViewBag.AccountNumber = accountNumber;
             ViewBag.EMI = emi;
-            ViewBag.Message = $"Loan account created. AccountID: {acc.AccountId}, EMI: ₹{emi:F2}, ROI: {roi:F2}%";
+            ViewBag.Message = $"Loan account created. Account#: {accountNumber} (ID: {acc.AccountId}), EMI: ₹{emi:F2}, ROI: {roi:F2}%";
+
             return View();
         }
-        //
-        // Deposit / Withdraw (savings) - same as employee behavior
-        //
+        
+        // Deposit / Withdraw (savings) 
+        
+        [SessionAuthorize]
         [HttpGet]
         public ActionResult DepositWithdraw() => View();
 
@@ -409,11 +522,12 @@ namespace MiniBank.Controllers
             return View();
         }
 
-        //
+        
         // Transactions view
-        //
+        
 
-        // ManageCustomers: show list or manage a specific customer (close accounts / remove customer)
+       
+        [SessionAuthorize]
         [HttpGet]
         public ActionResult ManageCustomers(int? customerId)
         {
@@ -451,7 +565,7 @@ namespace MiniBank.Controllers
             return View(customers);
         }
 
-        // Close selected accounts for a customer (manager)
+        // Close selected accounts for a customer 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CloseSelectedAccounts(int? customerId, int[] selectedSavingsIds, int[] selectedLoanIds)
@@ -466,7 +580,7 @@ namespace MiniBank.Controllers
             {
                 try
                 {
-                    // Close savings accounts selected (delete savings account rows and account row)
+                    // Close savings accounts selected 
                     if (selectedSavingsIds != null && selectedSavingsIds.Length > 0)
                     {
                         foreach (var accId in selectedSavingsIds)
@@ -490,7 +604,7 @@ namespace MiniBank.Controllers
                         }
                     }
 
-                    // Close loan accounts selected (mark closed if outstanding = 0)
+                    // Close loan accounts selected
                     if (selectedLoanIds != null && selectedLoanIds.Length > 0)
                     {
                         foreach (var accId in selectedLoanIds)
@@ -525,7 +639,7 @@ namespace MiniBank.Controllers
             }
         }
 
-        // Remove customer when no accounts exist (manager)
+        // Remove customer when no accounts exist
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CloseCustomerConfirmed(int? customerId)
@@ -576,13 +690,14 @@ namespace MiniBank.Controllers
             }
         }
 
-        //
-        // ViewTransactions (unchanged)
-        //
+        
+        // ViewTransactions 
+        
+        [SessionAuthorize]
         [HttpGet]
         public ActionResult ViewTransactions()
         {
-            // initial page with no results
+           
             ViewBag.SavingsTransactions = null;
             ViewBag.LoanTransactions = null;
             return View();
@@ -605,14 +720,14 @@ namespace MiniBank.Controllers
                 return View();
             }
 
-            // if one date provided and the other not -> error
+            
             if ((fromDate.HasValue && !toDate.HasValue) || (!fromDate.HasValue && toDate.HasValue))
             {
                 ViewBag.Error = "Provide both From and To dates when searching by date range.";
                 return View();
             }
 
-            // validate dates if provided
+           
             if (fromDate.HasValue && toDate.HasValue)
             {
                 var from = fromDate.Value.Date;
@@ -629,11 +744,11 @@ namespace MiniBank.Controllers
                 }
             }
 
-            // build queries
+            
             IQueryable<SavingsTransaction> savingsQuery = db.SavingsTransactions;
             IQueryable<LoanTransaction> loanQuery = db.LoanTransactions;
 
-            // if customerId supplied, restrict to accounts of that customer
+           
             if (customerId.HasValue)
             {
                 var accountIds = db.Accounts.Where(a => a.CustomerId == customerId.Value).Select(a => a.AccountId).ToList();
@@ -667,9 +782,9 @@ namespace MiniBank.Controllers
             return View();
         }
 
-        //
-        // View transactions for a specific customer (savings and loan)
-        //
+        
+        // View transactions for a specific customer 
+        
         public ActionResult ViewCustomerTransactions(int id) // id = customerId
         {
             var accountIds = db.Accounts.Where(a => a.CustomerId == id).Select(a => a.AccountId).ToList();
@@ -691,12 +806,13 @@ namespace MiniBank.Controllers
             return View();
         }
 
-        //
+        
         // Manage customers (list)
-        //
+        
+        [SessionAuthorize]
         public ActionResult ManageCustomers()
         {
-            return View(db.Customers        .ToList());
+            return View(db.Customers.ToList());
         }
 
         public ActionResult DeactivateCustomer(int id)

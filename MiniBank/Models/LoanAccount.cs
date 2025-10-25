@@ -24,6 +24,7 @@ namespace MiniBank.Models
         public decimal LoanAmount { get; set; }
         public System.DateTime StartDate { get; set; }
         public int TenureMonths { get; set; }
+        public decimal Salary { get; set; }
         public decimal AnnualROI { get; set; }
         public Nullable<decimal> EMI { get; set; }
         public Nullable<decimal> OutstandingAmount { get; set; }

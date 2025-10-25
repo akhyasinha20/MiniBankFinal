@@ -12,16 +12,16 @@ namespace MiniBank.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class FixedDepositAccount
     {
         public int AccountId { get; set; }
-        public string AccountType { get; set; }
         public int CustomerId { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public System.DateTime EndDate { get; set; }
+        public decimal FD_ROI { get; set; }
+        public decimal PrincipalAmount { get; set; }
     
+        public virtual Account Account { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual FixedDepositAccount FixedDepositAccount { get; set; }
-        public virtual LoanAccount LoanAccount { get; set; }
-        public virtual SavingsAccount SavingsAccount { get; set; }
     }
 }

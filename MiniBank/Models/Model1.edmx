@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MiniBankDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MiniBankDBNewModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -39,9 +39,20 @@
           <Property Name="EmpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="DeptId" Type="nvarchar" MaxLength="6" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FixedDepositAccount">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="FD_ROI" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PrincipalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="LoanAccount">
           <Key>
@@ -51,6 +62,7 @@
           <Property Name="LoanAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="TenureMonths" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="AnnualROI" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="EMI" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OutstandingAmount" Type="decimal" Precision="18" Scale="2" />
@@ -98,6 +110,18 @@
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedAt" Type="datetime" />
         </EntityType>
+        <Association Name="FK__FixedDepo__Custo__6383C8BA">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="FixedDepositAccount" Type="Self.FixedDepositAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="FixedDepositAccount">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Account_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
@@ -119,6 +143,18 @@
             </Principal>
             <Dependent Role="Employee">
               <PropertyRef Name="DeptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FixedDepositAccount_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="FixedDepositAccount" Type="Self.FixedDepositAccount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="FixedDepositAccount">
+              <PropertyRef Name="AccountId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -170,16 +206,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MiniBankDBModelStoreContainer">
+        <EntityContainer Name="MiniBankDBNewModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FixedDepositAccount" EntityType="Self.FixedDepositAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanAccount" EntityType="Self.LoanAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoanTransaction" EntityType="Self.LoanTransaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SavingsAccount" EntityType="Self.SavingsAccount" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SavingsTransaction" EntityType="Self.SavingsTransaction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRegister" EntityType="Self.UserRegister" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__FixedDepo__Custo__6383C8BA" Association="Self.FK__FixedDepo__Custo__6383C8BA">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="FixedDepositAccount" EntitySet="FixedDepositAccount" />
+          </AssociationSet>
           <AssociationSet Name="FK_Account_Customer" Association="Self.FK_Account_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="Account" EntitySet="Account" />
@@ -187,6 +228,10 @@
           <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FixedDepositAccount_Account" Association="Self.FK_FixedDepositAccount_Account">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="FixedDepositAccount" EntitySet="FixedDepositAccount" />
           </AssociationSet>
           <AssociationSet Name="FK_LoanAccount_Account" Association="Self.FK_LoanAccount_Account">
             <End Role="Account" EntitySet="Account" />
@@ -209,7 +254,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MiniBankDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="MiniBankDBNewModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="AccountId" />
@@ -219,6 +264,7 @@
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Customer" Relationship="Self.FK_Account_Customer" FromRole="Account" ToRole="Customer" />
+          <NavigationProperty Name="FixedDepositAccount" Relationship="Self.FK_FixedDepositAccount_Account" FromRole="Account" ToRole="FixedDepositAccount" />
           <NavigationProperty Name="LoanAccount" Relationship="Self.FK_LoanAccount_Account" FromRole="Account" ToRole="LoanAccount" />
           <NavigationProperty Name="SavingsAccount" Relationship="Self.FK_SavingsAccount_Account" FromRole="Account" ToRole="SavingsAccount" />
         </EntityType>
@@ -233,6 +279,7 @@
           <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Customer" FromRole="Customer" ToRole="Account" />
+          <NavigationProperty Name="FixedDepositAccounts" Relationship="Self.FK__FixedDepo__Custo__6383C8BA" FromRole="Customer" ToRole="FixedDepositAccount" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -249,10 +296,23 @@
           <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmployeeName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DeptId" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Department" Relationship="Self.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
+        </EntityType>
+        <EntityType Name="FixedDepositAccount">
+          <Key>
+            <PropertyRef Name="AccountId" />
+          </Key>
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FD_ROI" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PrincipalAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_FixedDepositAccount_Account" FromRole="FixedDepositAccount" ToRole="Account" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__FixedDepo__Custo__6383C8BA" FromRole="FixedDepositAccount" ToRole="Customer" />
         </EntityType>
         <EntityType Name="LoanAccount">
           <Key>
@@ -262,6 +322,7 @@
           <Property Name="LoanAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="TenureMonths" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="AnnualROI" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="EMI" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OutstandingAmount" Type="Decimal" Precision="18" Scale="2" />
@@ -327,6 +388,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FixedDepositAccount_Account">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="FixedDepositAccount" Type="Self.FixedDepositAccount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="AccountId" />
+            </Principal>
+            <Dependent Role="FixedDepositAccount">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_LoanAccount_Account">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="LoanAccount" Type="Self.LoanAccount" Multiplicity="0..1" />
@@ -348,6 +421,18 @@
             </Principal>
             <Dependent Role="SavingsAccount">
               <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FixedDepo__Custo__6383C8BA">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="FixedDepositAccount" Type="Self.FixedDepositAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="FixedDepositAccount">
+              <PropertyRef Name="CustomerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -387,11 +472,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MiniBankDBEntities4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MiniBankDBNewEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="FixedDepositAccounts" EntityType="Self.FixedDepositAccount" />
           <EntitySet Name="LoanAccounts" EntityType="Self.LoanAccount" />
           <EntitySet Name="LoanTransactions" EntityType="Self.LoanTransaction" />
           <EntitySet Name="SavingsAccounts" EntityType="Self.SavingsAccount" />
@@ -401,6 +487,10 @@
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
+          <AssociationSet Name="FK_FixedDepositAccount_Account" Association="Self.FK_FixedDepositAccount_Account">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="FixedDepositAccount" EntitySet="FixedDepositAccounts" />
+          </AssociationSet>
           <AssociationSet Name="FK_LoanAccount_Account" Association="Self.FK_LoanAccount_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="LoanAccount" EntitySet="LoanAccounts" />
@@ -408,6 +498,10 @@
           <AssociationSet Name="FK_SavingsAccount_Account" Association="Self.FK_SavingsAccount_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="SavingsAccount" EntitySet="SavingsAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FixedDepo__Custo__6383C8BA" Association="Self.FK__FixedDepo__Custo__6383C8BA">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="FixedDepositAccount" EntitySet="FixedDepositAccounts" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
             <End Role="Department" EntitySet="Departments" />
@@ -427,9 +521,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MiniBankDBModelStoreContainer" CdmEntityContainer="MiniBankDBEntities4">
+        <EntityContainerMapping StorageEntityContainer="MiniBankDBNewModelStoreContainer" CdmEntityContainer="MiniBankDBNewEntities">
           <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="MiniBankDBModel.Account">
+            <EntityTypeMapping TypeName="MiniBankDBNewModel.Account">
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="AccountType" ColumnName="AccountType" />
@@ -439,7 +533,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="MiniBankDBModel.Customer">
+            <EntityTypeMapping TypeName="MiniBankDBNewModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="CustName" ColumnName="CustName" />
@@ -451,7 +545,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Departments">
-            <EntityTypeMapping TypeName="MiniBankDBModel.Department">
+            <EntityTypeMapping TypeName="MiniBankDBNewModel.Department">
               <MappingFragment StoreEntitySet="Department">
                 <ScalarProperty Name="DeptId" ColumnName="DeptId" />
                 <ScalarProperty Name="DeptName" ColumnName="DeptName" />
@@ -459,7 +553,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="MiniBankDBModel.Employee">
+            <EntityTypeMapping TypeName="MiniBankDBNewModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
                 <ScalarProperty Name="EmpId" ColumnName="EmpId" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
@@ -470,13 +564,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FixedDepositAccounts">
+            <EntityTypeMapping TypeName="MiniBankDBNewModel.FixedDepositAccount">
+              <MappingFragment StoreEntitySet="FixedDepositAccount">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="FD_ROI" ColumnName="FD_ROI" />
+                <ScalarProperty Name="PrincipalAmount" ColumnName="PrincipalAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LoanAccounts">
-            <EntityTypeMapping TypeName="MiniBankDBModel.LoanAccount">
+            <EntityTypeMapping TypeName="MiniBankDBNewModel.LoanAccount">
               <MappingFragment StoreEntitySet="LoanAccount">
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="TenureMonths" ColumnName="TenureMonths" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="AnnualROI" ColumnName="AnnualROI" />
                 <ScalarProperty Name="EMI" ColumnName="EMI" />
                 <ScalarProperty Name="OutstandingAmount" ColumnName="OutstandingAmount" />
@@ -485,7 +592,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LoanTransactions">
-            <EntityTypeMapping TypeName="MiniBankDBModel.LoanTransaction">
+            <EntityTypeMapping TypeName="MiniBankDBNewModel.LoanTransaction">
               <MappingFragment StoreEntitySet="LoanTransaction">
                 <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="LoanAccountId" ColumnName="LoanAccountId" />
@@ -496,7 +603,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SavingsAccounts">
-            <EntityTypeMapping TypeName="MiniBankDBModel.SavingsAccount">
+            <EntityTypeMapping TypeName="MiniBankDBNewModel.SavingsAccount">
               <MappingFragment StoreEntitySet="SavingsAccount">
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="Balance" ColumnName="Balance" />
@@ -505,7 +612,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SavingsTransactions">
-            <EntityTypeMapping TypeName="MiniBankDBModel.SavingsTransaction">
+            <EntityTypeMapping TypeName="MiniBankDBNewModel.SavingsTransaction">
               <MappingFragment StoreEntitySet="SavingsTransaction">
                 <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="AccountId" ColumnName="AccountId" />
@@ -517,7 +624,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserRegisters">
-            <EntityTypeMapping TypeName="MiniBankDBModel.UserRegister">
+            <EntityTypeMapping TypeName="MiniBankDBNewModel.UserRegister">
               <MappingFragment StoreEntitySet="UserRegister">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Username" ColumnName="Username" />

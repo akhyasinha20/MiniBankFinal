@@ -140,6 +140,7 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Filters\SessionAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -153,6 +154,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Employee.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FixedDepositAccount.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoanAccount.cs">
@@ -243,6 +247,8 @@
     <Content Include="Views\Manager\DepositWithdraw.cshtml" />
     <Content Include="Views\Manager\ViewCustomerTransactions.cshtml" />
     <Content Include="Views\Shared\_DashboardLink.cshtml" />
+    <Content Include="Views\Employee\OpenFixedDeposit.cshtml" />
+    <Content Include="Views\Manager\OpenFixedDeposit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

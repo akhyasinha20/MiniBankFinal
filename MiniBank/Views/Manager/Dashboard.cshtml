@@ -82,9 +82,28 @@
                 <div class="text-muted small"> </div>
             </div>
         </div>
-    </div>
+        <div class="dashboard-card variant-teal">
+            <div class="card-top">
+                <div class="icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="12" cy="6" rx="6" ry="2" fill="#0fa3a1" />
+                        <path d="M6 6v6c0 2.2 3.3 4 6 4s6-1.8 6-4V6" fill="#0fa3a1" opacity="0.06" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="card-title">Total Fixed Deposit Accounts</div>
+                    <div class="card-sub">Active Fixed Deposit accounts</div>
+                </div>
+            </div>
 
-    <div class="dashboard-grid mt-4">
+            <div class="d-flex justify-content-between align-items-end mt-3">
+                <div class="value" style="font-size:1.6rem;font-weight:700;">
+                    @(ViewBag.TotalFixedAccounts ?? 0)
+                </div>
+                <div class="text-muted small"> </div>
+            </div>
+        </div>
+  
         <div class="dashboard-card variant-blue">
             <div class="card-top">
                 <div class="icon" aria-hidden="true">
@@ -123,7 +142,7 @@
             </div>
         </div>
 
-     
+
         <div class="dashboard-card variant-accent">
             <div class="card-top">
                 <div class="icon" aria-hidden="true">
@@ -140,6 +159,25 @@
 
             <div class="d-flex justify-content-end mt-3">
                 <a class="btn btn-outline-primary" href="@Url.Action("OpenAccount","Manager")">Open</a>
+            </div>
+        </div>
+        <!-- Fixed Deposit: manager quick action (added) -->
+        <div class="dashboard-card variant-green">
+            <div class="card-top">
+                <div class="icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="9" fill="#0b854f" opacity="0.06" />
+                        <path d="M8 12h8M8 16h8M8 8h8" stroke="#0b854f" stroke-width="1.4" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="card-title">Fixed Deposit</div>
+                    <div class="card-sub">Open Fixed Deposit account</div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-3">
+                <a class="btn btn-success" href="@Url.Action("OpenFixedDeposit","Manager")">Open</a>
             </div>
         </div>
 

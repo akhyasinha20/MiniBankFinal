@@ -15,6 +15,9 @@
     int activeLoanCount = (ViewBag.ActiveLoanCount ?? 0);
 
     var loanSummaries = ViewBag.LoanSummaries as IEnumerable<dynamic> ?? Enumerable.Empty<dynamic>();
+    var fdSummaries = ViewBag.FDSummaries as IEnumerable<dynamic> ?? Enumerable.Empty<dynamic>();
+    decimal totalFDPrincipal = (ViewBag.TotalFDPrincipal ?? 0m);
+    int fdCount = (ViewBag.FDCount ?? 0);
 }
 
 <div class="card p-4 mt-4">
@@ -92,6 +95,27 @@
                 <div class="text-muted small mt-1">Manage payments below</div>
             </div>
         </div>
+
+        <!-- Fixed Deposit summary tile -->
+        <div class="dashboard-card variant-green">
+            <div class="card-top">
+                <div class="icon" aria-hidden="true">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="9" fill="#0b854f" opacity="0.06" />
+                        <path d="M8 12h8M8 16h8M8 8h8" stroke="#0b854f" stroke-width="1.4" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="card-title">Fixed Deposits</div>
+                    <div class="card-sub">@fdCount active</div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-end mt-3">
+                <div class="value" style="font-size:1.2rem; font-weight:700; color:#0b854f;">₹@totalFDPrincipal.ToString("N2")</div>
+                <div class="text-muted small">Total principal</div>
+            </div>
+        </div>
     </div>
 
     <!-- Loan list (if any) -->
@@ -139,6 +163,59 @@
                                         {
                                             <div class="fw-semibold">@nextDue.ToString("yyyy-MM-dd")</div>
                                         }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <!-- Fixed Deposit list (if any) -->
+    <div class="mt-4">
+        <h5 class="mb-3 text-primary">Fixed Deposits</h5>
+
+        @if (!fdSummaries.Any())
+        {
+            <div class="alert alert-info">You have no fixed deposit accounts.</div>
+        }
+        else
+        {
+            <div class="row g-3">
+                @foreach (var fd in fdSummaries)
+                {
+                    <div class="col-md-6">
+                        <div class="dashboard-card variant-green">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <div class="fw-semibold">FD Account #@fd.FDAccountId</div>
+                                    <div class="text-muted small">Start: @(((DateTime)fd.StartDate).ToString("yyyy-MM-dd"))</div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="fw-bold text-success">₹@(((decimal)fd.MaturityAmount).ToString("N2"))</div>
+                                    <div class="text-muted small">Maturity Value</div>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="text-muted small">
+                                    Principal: ₹@(((decimal)fd.Principal).ToString("N2"))<br />
+                                    ROI: @(((decimal)fd.ROI).ToString("F2"))%<br />
+                                    Matures: @(((DateTime)fd.EndDate).ToString("yyyy-MM-dd"))
+                                </div>
+                                <div class="text-end">
+                                    @if ((bool)fd.IsMatured)
+                                    {
+                                        <div class="text-success fw-semibold">Matured</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="text-muted small">Days left</div>
+                                        <div class="fw-semibold">@fd.DaysRemaining</div>
                                     }
                                 </div>
                             </div>

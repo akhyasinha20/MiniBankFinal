@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,13 +11,13 @@ namespace MiniBank.Controllers
 {
     public class CustomerController : Controller
     {
-        private MiniBankDBEntities4 db = new MiniBankDBEntities4();
+        private MiniBankDBNewEntities db = new MiniBankDBNewEntities();
 
         // GET: Customer Dashboard
         public ActionResult Dashboard()
         {
             var uname = Session["Username"];
-            // Get customer details
+            
             var customer = db.Customers.FirstOrDefault(c => c.CustName == (string)uname);
             if (customer == null) return RedirectToAction("Login", "Auth");
             var customerId = customer.CustomerId;
@@ -39,7 +38,7 @@ namespace MiniBank.Controllers
                     .Sum(v => v.Value);
             }
 
-            // Loan accounts and summaries (use ExpandoObject so view can access properties via dynamic)
+            // Loan accounts and summaries 
             var loanAccounts = db.LoanAccounts
                 .Where(l => accountIds.Contains(l.AccountId))
                 .ToList();
@@ -88,8 +87,68 @@ namespace MiniBank.Controllers
                 loanSummaries.Add(exp);
             }
 
-            // Prepare ViewBag
-            // Keep primary savings account fetch for backward compatibility
+            // Fixed Deposit accounts and summaries 
+            var fdSummaries = new List<dynamic>();
+            decimal totalFDPrincipal = 0m;
+            if (accountIds.Any())
+            {
+                var fdAccounts = db.FixedDepositAccounts
+                    .Where(f => accountIds.Contains(f.AccountId))
+                    .ToList();
+
+                foreach (var fd in fdAccounts)
+                {
+                    var fdId = fd.AccountId;
+                    var start = fd.StartDate;
+                    var end = fd.EndDate;
+                    decimal principal = fd.PrincipalAmount;
+                    decimal roi = fd.FD_ROI; 
+
+                    
+                    double years = 0.0;
+                    try
+                    {
+                        years = (end.Date - start.Date).TotalDays / 365.0;
+                        if (years < 0) years = 0.0;
+                    }
+                    catch
+                    {
+                        years = 0.0;
+                    }
+
+                    // Compound annually
+                    double r = (double)roi / 100.0;
+                    double maturityDouble = 0.0;
+                    try
+                    {
+                        maturityDouble = (double)principal * Math.Pow(1.0 + r, years);
+                    }
+                    catch
+                    {
+                        maturityDouble = (double)principal;
+                    }
+                    decimal maturityAmount = Math.Round((decimal)maturityDouble, 2);
+
+                    bool isMatured = DateTime.Today >= end.Date;
+                    int daysRemaining = (end.Date - DateTime.Today).Days;
+                    if (daysRemaining < 0) daysRemaining = 0;
+
+                    dynamic fexp = new ExpandoObject();
+                    fexp.FDAccountId = fdId;
+                    fexp.Principal = principal;
+                    fexp.ROI = roi;
+                    fexp.StartDate = start;
+                    fexp.EndDate = end;
+                    fexp.MaturityAmount = maturityAmount;
+                    fexp.IsMatured = isMatured;
+                    fexp.DaysRemaining = daysRemaining;
+
+                    fdSummaries.Add(fexp);
+                    totalFDPrincipal += principal;
+                }
+            }
+
+          
             var primarySavingsAccount = db.Accounts.FirstOrDefault(a => a.CustomerId == customerId && a.AccountType == "Savings");
 
             ViewBag.Customer = customer;
@@ -99,8 +158,11 @@ namespace MiniBank.Controllers
             ViewBag.LoanMap = db.LoanAccounts.Where(l => accountIds.Contains(l.AccountId)).ToDictionary(l => l.AccountId);
             ViewBag.TotalBalance = totalBalance;
             ViewBag.LoanSummaries = loanSummaries;
+            ViewBag.FDSummaries = fdSummaries;
+            ViewBag.TotalFDPrincipal = totalFDPrincipal;
+            ViewBag.FDCount = fdSummaries.Count;
 
-            // compute incoming EMI and active loan count from the dynamic list (avoid relying on dynamic LINQ)
+           
             decimal incomingEMI = 0m;
             int activeLoanCount = 0;
             foreach (var s in loanSummaries)

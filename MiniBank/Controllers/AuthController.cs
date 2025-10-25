@@ -1,16 +1,19 @@
-﻿using MiniBank.Models;
+﻿
+using MiniBank.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+
 namespace MiniBank.Controllers
 {
     public class AuthController : Controller
     {
         // GET: Auth
-        private MiniBankDBEntities4 db = new MiniBankDBEntities4();
+        private MiniBankDBNewEntities db = new MiniBankDBNewEntities();
 
         [HttpGet]
         public ActionResult Login()
@@ -63,7 +66,7 @@ namespace MiniBank.Controllers
         [HttpPost]
         public ActionResult Register(string username, string password, string email, string role)
         {
-            var usernameRegex = new Regex(@"^[A-Za-z]+$"); // only alphabets
+            var usernameRegex = new Regex(@"^[A-Z][a-zA-Z]*(?:[ '-][A-Z][a-zA-Z]*)*$"); // only alphabets
             var passwordRegex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$");
             if (string.IsNullOrWhiteSpace(username) || !usernameRegex.IsMatch(username))
             {
@@ -102,14 +105,55 @@ namespace MiniBank.Controllers
             db.UserRegisters.Add(user);
             db.SaveChanges();
 
-            // PRG: redirect to Login and carry a success message
+            // redirect to Login 
             TempData["Message"] = "Registration successful! Manager approval required for employees.";
             return RedirectToAction("Login");
         }
 
+        [HttpGet]
         public ActionResult Logout()
         {
-            Session.Clear();
+            try
+            {
+                // Clear all session entries and abandon session on server
+                Session.Clear();
+                Session.RemoveAll();
+                Session.Abandon();
+
+               
+                try
+                {
+                    FormsAuthentication.SignOut();
+                    if (Request.Cookies[FormsAuthentication.FormsCookieName] != null)
+                    {
+                        var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName) { Expires = DateTime.Now.AddDays(-1), HttpOnly = true };
+                        Response.Cookies.Add(authCookie);
+                    }
+                }
+                catch { /* ignore if FormsAuth not used */ }
+
+                if (Request.Cookies["ASP.NET_SessionId"] != null)
+                {
+                    var sessionCookie = new HttpCookie("ASP.NET_SessionId") { Expires = DateTime.Now.AddDays(-1), HttpOnly = true };
+                    Response.Cookies.Add(sessionCookie);
+                }
+
+                // Remove any app-specific cookies
+                foreach (string cookieKey in Request.Cookies.AllKeys)
+                {
+                    try
+                    {
+                        var c = new HttpCookie(cookieKey) { Expires = DateTime.Now.AddDays(-1) };
+                        Response.Cookies.Add(c);
+                    }
+                    catch { /* ignore individual cookie removal errors */ }
+                }
+            }
+            catch
+            {
+                // best-effort cleanup; continue to redirect to login
+            }
+
             return RedirectToAction("Login");
         }
     }
